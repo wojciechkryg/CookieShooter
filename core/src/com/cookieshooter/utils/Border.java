@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.cookieshooter.Config;
 import com.cookieshooter.MainGame;
 
 public class Border {
@@ -24,7 +25,7 @@ public class Border {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(viewport.getWorldWidth(), 1 / MainGame.PPM);
+        shape.setAsBox(viewport.getWorldWidth(), 1 / Config.PPM);
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
@@ -40,7 +41,7 @@ public class Border {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1 / MainGame.PPM, viewport.getWorldHeight());
+        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight());
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
@@ -56,7 +57,7 @@ public class Border {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1 / MainGame.PPM, viewport.getWorldHeight());
+        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight());
 
         fdef.shape = shape;
         b2body.createFixture(fdef);

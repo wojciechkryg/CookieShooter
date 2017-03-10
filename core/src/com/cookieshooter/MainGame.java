@@ -19,7 +19,6 @@ import com.cookieshooter.utils.Border;
 import java.io.Console;
 
 public class MainGame extends ApplicationAdapter {
-    public final static float PPM = 100;
     public static SpriteBatch batch;
     OrthographicCamera cam;
     World world;
@@ -32,7 +31,7 @@ public class MainGame extends ApplicationAdapter {
         batch = new SpriteBatch();
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, -10), true);
-        viewport = new FitViewport(Gdx.graphics.getWidth() / PPM, Gdx.graphics.getHeight() / PPM, cam);
+        viewport = new FitViewport(Gdx.graphics.getWidth() / Config.PPM, Gdx.graphics.getHeight() / Config.PPM, cam);
         b2dr = new Box2DDebugRenderer();
 
         new Border().init(viewport, world);
@@ -74,10 +73,10 @@ public class MainGame extends ApplicationAdapter {
     private void handleInput() {
         float accelX = Gdx.input.getAccelerometerX();
         System.out.print(accelX);
-        if(accelX>2)
-            player.moveRight(-1*accelX);
-        else if(accelX<-2)
-            player.moveLeft(-1*accelX);
+        if (accelX > 2)
+            player.moveRight(-1 * accelX);
+        else if (accelX < -2)
+            player.moveLeft(-1 * accelX);
 
     }
 }

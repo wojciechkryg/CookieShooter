@@ -25,13 +25,13 @@ public class Player {
 
     private void initPlayer() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(viewport.getWorldWidth() / 2, 80 / MainGame.PPM);
+        bdef.position.set(viewport.getWorldWidth() / 2, 80 / Config.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         player = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(64 / MainGame.PPM, 64 / MainGame.PPM);
+        shape.setAsBox(64 / Config.PPM, 64 / Config.PPM);
 
         fdef.shape = shape;
         player.createFixture(fdef);
