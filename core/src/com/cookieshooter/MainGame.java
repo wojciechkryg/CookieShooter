@@ -24,7 +24,7 @@ public class MainGame extends ApplicationAdapter {
     Viewport viewport;
     Box2DDebugRenderer b2dr;
     Controller controller;
-    Body player;
+    Player player;
 
     @Override
     public void create() {
@@ -35,8 +35,8 @@ public class MainGame extends ApplicationAdapter {
         b2dr = new Box2DDebugRenderer();
         controller = new Controller();
 
-        createGround();
-        createPlayer();
+        Ground ground = new Ground(viewport, world);
+        player = new Player(viewport, world);
     }
 
     @Override
@@ -76,37 +76,9 @@ public class MainGame extends ApplicationAdapter {
 
     private void handleInput() {
         if (controller.isLeftPressed()) {
-            player.setLinearVelocity(new Vector2(-3, player.getLinearVelocity().y));
+            player.moveLeft();
         } else if (controller.isRightPressed()) {
-            player.setLinearVelocity(new Vector2(3, player.getLinearVelocity().y));
+            player.moveRight();
         }
-    }
-
-    private void createGround() {
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(viewport.getWorldWidth() / 2, 0);
-        bdef.type = BodyDef.BodyType.StaticBody;
-        Body b2body = world.createBody(bdef);
-
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(viewport.getWorldWidth() / 2, 200 / PPM);
-
-        fdef.shape = shape;
-        b2body.createFixture(fdef);
-    }
-
-    private void createPlayer() {
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(viewport.getWorldWidth() / 2, 80 / PPM);
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        player = world.createBody(bdef);
-
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(64 / PPM, 64 / PPM);
-
-        fdef.shape = shape;
-        player.createFixture(fdef);
     }
 }
