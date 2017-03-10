@@ -1,5 +1,6 @@
 package com.cookieshooter;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
 
 public class Player {
 
@@ -37,11 +39,11 @@ public class Player {
         shape.dispose();
     }
 
-    public void moveLeft() {
-        player.setLinearVelocity(new Vector2(-3, player.getLinearVelocity().y));
+    public void moveLeft(float acc) {
+            player.setLinearVelocity(new Vector2(acc, player.getLinearVelocity().y));
     }
 
-    public void moveRight() {
-        player.setLinearVelocity(new Vector2(3, player.getLinearVelocity().y));
+    public void moveRight(float acc) {
+            player.setLinearVelocity(new Vector2(acc, player.getLinearVelocity().y));
     }
 }

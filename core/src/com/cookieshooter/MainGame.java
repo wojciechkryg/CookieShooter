@@ -14,8 +14,9 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.cookieshooter.controller.Controller;
 import com.cookieshooter.utils.Border;
+
+import java.io.Console;
 
 public class MainGame extends ApplicationAdapter {
     public final static float PPM = 100;
@@ -24,7 +25,6 @@ public class MainGame extends ApplicationAdapter {
     World world;
     Viewport viewport;
     Box2DDebugRenderer b2dr;
-    Controller controller;
     Player player;
 
     @Override
@@ -34,7 +34,6 @@ public class MainGame extends ApplicationAdapter {
         world = new World(new Vector2(0, -10), true);
         viewport = new FitViewport(Gdx.graphics.getWidth() / PPM, Gdx.graphics.getHeight() / PPM, cam);
         b2dr = new Box2DDebugRenderer();
-        controller = new Controller();
 
         new Border().init(viewport, world);
         player = new Player(viewport, world);
@@ -44,7 +43,6 @@ public class MainGame extends ApplicationAdapter {
     public void resize(int width, int height) {
         super.resize(width, height);
         viewport.update(width, height);
-        controller.resize(width, height);
     }
 
     @Override
@@ -57,7 +55,6 @@ public class MainGame extends ApplicationAdapter {
         b2dr.render(world, cam.combined);
         batch.end();
 
-        controller.draw();
     }
 
     @Override
@@ -65,7 +62,6 @@ public class MainGame extends ApplicationAdapter {
         batch.dispose();
         world.dispose();
         b2dr.dispose();
-        controller.dispose();
     }
 
     private void update(float deltaTime) {
@@ -76,10 +72,12 @@ public class MainGame extends ApplicationAdapter {
     }
 
     private void handleInput() {
-        if (controller.isLeftPressed()) {
-            player.moveLeft();
-        } else if (controller.isRightPressed()) {
-            player.moveRight();
-        }
+        float accelX = Gdx.input.getAccelerometerX();
+        System.out.print(accelX);
+        if(accelX>2)
+            player.moveRight(-1*accelX);
+        else if(accelX<-2)
+            player.moveLeft(-1*accelX);
+
     }
 }
