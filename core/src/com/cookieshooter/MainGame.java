@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.controller.Controller;
+import com.cookieshooter.utils.Border;
 
 public class MainGame extends ApplicationAdapter {
     public final static float PPM = 100;
@@ -35,7 +36,7 @@ public class MainGame extends ApplicationAdapter {
         b2dr = new Box2DDebugRenderer();
         controller = new Controller();
 
-        Ground ground = new Ground(viewport, world);
+        new Border().init(viewport, world);
         player = new Player(viewport, world);
     }
 
