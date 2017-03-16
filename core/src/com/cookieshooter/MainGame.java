@@ -6,20 +6,18 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.cookieshooter.states.GameStateManager;
+import com.cookieshooter.states.MenuState;
 import com.cookieshooter.utils.Border;
 
-import java.io.Console;
 
 public class MainGame extends ApplicationAdapter {
-    public static SpriteBatch batch;
+    private static SpriteBatch batch;
+    private GameStateManager gameStateManager;
     OrthographicCamera cam;
     World world;
     Viewport viewport;
@@ -29,6 +27,7 @@ public class MainGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
+        gameStateManager = new GameStateManager();
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, -10), true);
         viewport = new FitViewport(Gdx.graphics.getWidth() / Config.PPM, Gdx.graphics.getHeight() / Config.PPM, cam);
@@ -36,6 +35,9 @@ public class MainGame extends ApplicationAdapter {
 
         new Border().init(viewport, world);
         player = new Player(viewport, world);
+
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        gameStateManager.push(new MenuState(gameStateManager));
     }
 
     @Override
@@ -47,8 +49,9 @@ public class MainGame extends ApplicationAdapter {
     @Override
     public void render() {
         update(Gdx.graphics.getDeltaTime());
-        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        gameStateManager.update(Gdx.graphics.getDeltaTime());
+        gameStateManager.render(batch);
 
         batch.begin();
         b2dr.render(world, cam.combined);
