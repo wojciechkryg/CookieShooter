@@ -26,6 +26,7 @@ public class MainGame extends ApplicationAdapter {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         gameStateManager.push(new MenuState(gameStateManager));
+        configure();
     }
 
     @Override
@@ -44,5 +45,9 @@ public class MainGame extends ApplicationAdapter {
     @Override
     public void dispose() {
         batch.dispose();
+    }
+
+    private void configure() {
+        Gdx.input.setCatchBackKey(true);
     }
 }

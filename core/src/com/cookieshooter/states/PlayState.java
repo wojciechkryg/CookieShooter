@@ -1,6 +1,7 @@
 package com.cookieshooter.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -33,12 +34,8 @@ public class PlayState extends State {
 
     @Override
     protected void handleInput() {
-        float accelX = Gdx.input.getAccelerometerX();
-        System.out.print(accelX);
-        if (accelX > 2)
-            player.moveRight(-1 * accelX);
-        else if (accelX < -2)
-            player.moveLeft(-1 * accelX);
+        handleAccelerometerInput();
+        handleKeyInput();
     }
 
     @Override
@@ -65,5 +62,25 @@ public class PlayState extends State {
     public void dispose() {
         world.dispose();
         b2dr.dispose();
+    }
+
+    private void handleAccelerometerInput() {
+        movePlayer(Gdx.input.getAccelerometerX());
+    }
+
+    private void handleKeyInput() {
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            // TODO: pause current state
+            gameStateManager.set(new MenuState(gameStateManager));
+        }
+    }
+
+    private void movePlayer(float rotationRate) {
+        if (rotationRate > 2) {
+            player.moveRight(-1 * rotationRate);
+        }
+        else if (rotationRate < -2) {
+            player.moveLeft(-1 * rotationRate);
+        }
     }
 }
