@@ -3,6 +3,7 @@ package com.cookieshooter.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.cookieshooter.common.AssetsPath;
 
 public class MenuState extends State {
 
@@ -11,8 +12,8 @@ public class MenuState extends State {
 
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
-        background = new Texture("badlogic.jpg");
-        playBtn = new Texture("right.png");
+        background = new Texture(AssetsPath.MENU_BACKGROUND);
+        playBtn = new Texture(AssetsPath.MENU_START);
     }
 
     @Override

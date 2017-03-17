@@ -1,7 +1,6 @@
 package com.cookieshooter.states;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -9,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.cookieshooter.Config;
 import com.cookieshooter.Player;
 import com.cookieshooter.utils.Border;
 
@@ -19,11 +17,9 @@ public class PlayState extends State {
     private World world;
     private Box2DDebugRenderer b2dr;
     private Player player;
-    private Texture playerTexture;
 
     protected PlayState(GameStateManager gameStateManager) {
         super(gameStateManager);
-        playerTexture = new Texture("badlogic.jpg");
 
         cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         world = new World(new Vector2(0, -10), true);
@@ -56,7 +52,6 @@ public class PlayState extends State {
     @Override
     public void render(SpriteBatch batch) {
         batch.begin();
-        batch.draw(playerTexture, 0, 0);
         b2dr.render(world, cam.combined);
         batch.end();
     }
