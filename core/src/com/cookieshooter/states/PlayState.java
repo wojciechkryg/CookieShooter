@@ -76,11 +76,6 @@ public class PlayState extends State {
     }
 
     private void movePlayer(float rotationRate) {
-        if (rotationRate > 2) {
-            player.moveRight(-1 * rotationRate);
-        }
-        else if (rotationRate < -2) {
-            player.moveLeft(-1 * rotationRate);
-        }
+        player.move(-1 * rotationRate);
     }
 }

@@ -3,25 +3,35 @@ package com.cookieshooter.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.cookieshooter.common.AssetsPath;
 
 public class MenuState extends State {
 
-    private Texture background;
     private Texture playBtn;
+    private Drawable drawable;
+    private ImageButton playButton;
+    private Stage stage;
 
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
-        background = new Texture(AssetsPath.MENU_BACKGROUND);
         playBtn = new Texture(AssetsPath.MENU_START);
+        drawable = new TextureRegionDrawable(new TextureRegion(playBtn));
+        playButton = new ImageButton(drawable);
+        playButton.addListener(getPlayEventListener());
+        stage = new Stage();
+        stage.addActor(playButton);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void handleInput() {
-        if (Gdx.input.justTouched()) {
-            gameStateManager.set(new PlayState(gameStateManager));
-            dispose();
-        }
     }
 
     @Override
@@ -32,8 +42,7 @@ public class MenuState extends State {
     @Override
     public void render(SpriteBatch batch) {
         batch.begin();
-        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(playBtn, Gdx.graphics.getWidth() / 2 - playBtn.getWidth() / 2, Gdx.graphics.getHeight() / 2 - playBtn.getHeight() / 2);
+        stage.draw();
         batch.end();
     }
 
@@ -44,7 +53,23 @@ public class MenuState extends State {
 
     @Override
     public void dispose() {
-        background.dispose();
         playBtn.dispose();
+    }
+
+
+    public EventListener getPlayEventListener() {
+        EventListener eventListener = new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                return playclick();
+            }
+        };
+        return eventListener;
+    }
+
+    private boolean playclick() {
+        gameStateManager.set(new PlayState(gameStateManager));
+        dispose();
+        return false;
     }
 }

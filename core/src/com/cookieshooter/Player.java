@@ -40,11 +40,8 @@ public class Player {
         shape.dispose();
     }
 
-    public void moveLeft(float acc) {
+    public void move(float acc) {
         player.setLinearVelocity(new Vector2(acc, player.getLinearVelocity().y));
     }
 
-    public void moveRight(float acc) {
-        player.setLinearVelocity(new Vector2(acc, player.getLinearVelocity().y));
-    }
 }
