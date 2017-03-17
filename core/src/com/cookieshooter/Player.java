@@ -1,6 +1,5 @@
 package com.cookieshooter;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -25,13 +24,15 @@ public class Player {
 
     private void initPlayer() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(viewport.getWorldWidth() / 2, 80 / Config.PPM);
+        //bdef.position.set(viewport.getWorldWidth() / 2, 80 * Config.PPM);
+        bdef.position.set(viewport.getWorldWidth() / 2, 80);
         bdef.type = BodyDef.BodyType.DynamicBody;
         player = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(64 / Config.PPM, 64 / Config.PPM);
+        //shape.setAsBox(64 * Config.PPM, 64 * Config.PPM);
+        shape.setAsBox(64, 64);
 
         fdef.shape = shape;
         player.createFixture(fdef);
@@ -40,10 +41,10 @@ public class Player {
     }
 
     public void moveLeft(float acc) {
-            player.setLinearVelocity(new Vector2(acc, player.getLinearVelocity().y));
+        player.setLinearVelocity(new Vector2(acc, player.getLinearVelocity().y));
     }
 
     public void moveRight(float acc) {
-            player.setLinearVelocity(new Vector2(acc, player.getLinearVelocity().y));
+        player.setLinearVelocity(new Vector2(acc, player.getLinearVelocity().y));
     }
 }

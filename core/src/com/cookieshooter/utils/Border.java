@@ -25,7 +25,8 @@ public class Border {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(viewport.getWorldWidth(), 1 / Config.PPM);
+        //shape.setAsBox(viewport.getWorldWidth(), 1 * Config.PPM);
+        shape.setAsBox(viewport.getWorldWidth(), 1);
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
@@ -41,7 +42,8 @@ public class Border {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight());
+        //shape.setAsBox(1 * Config.PPM, viewport.getWorldHeight());
+        shape.setAsBox(1, viewport.getWorldHeight());
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
@@ -57,7 +59,8 @@ public class Border {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight());
+        //shape.setAsBox(1 * Config.PPM, viewport.getWorldHeight());
+        shape.setAsBox(1, viewport.getWorldHeight());
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
