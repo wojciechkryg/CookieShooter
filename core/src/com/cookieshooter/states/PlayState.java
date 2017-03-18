@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.Player;
+import com.cookieshooter.common.Config;
 import com.cookieshooter.utils.Border;
 
 public class PlayState extends State {
@@ -22,10 +23,9 @@ public class PlayState extends State {
     protected PlayState(GameStateManager gameStateManager) {
         super(gameStateManager);
 
-        cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         world = new World(new Vector2(0, -10), true);
-        //viewport = new FitViewport(Gdx.graphics.getWidth() * Config.PPM, Gdx.graphics.getHeight() * Config.PPM, cam);
-        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
+        viewport = new FitViewport(Gdx.graphics.getWidth() / Config.PPM, Gdx.graphics.getHeight() / Config.PPM, cam);
+        cam.setToOrtho(false, viewport.getWorldWidth(), viewport.getWorldHeight());
         b2dr = new Box2DDebugRenderer();
 
         new Border().init(viewport, world);

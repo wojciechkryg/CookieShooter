@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.cookieshooter.common.Config;
 
 public class Border {
 
@@ -16,52 +17,49 @@ public class Border {
     }
 
     private void initBottom(Viewport viewport, World world) {
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(0, 0);
-        bdef.type = BodyDef.BodyType.StaticBody;
-        Body b2body = world.createBody(bdef);
+        BodyDef bodyDefinition = new BodyDef();
+        bodyDefinition.position.set(0, 0);
+        bodyDefinition.type = BodyDef.BodyType.StaticBody;
+        Body b2body = world.createBody(bodyDefinition);
 
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef fixtureDefinition = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        //shape.setAsBox(viewport.getWorldWidth(), 1 * Config.PPM);
-        shape.setAsBox(viewport.getWorldWidth(), 1);
+        shape.setAsBox(viewport.getWorldWidth() , 1 / Config.PPM);
 
-        fdef.shape = shape;
-        b2body.createFixture(fdef);
+        fixtureDefinition.shape = shape;
+        b2body.createFixture(fixtureDefinition);
 
         shape.dispose();
     }
 
     private void initLeft(Viewport viewport, World world) {
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(0, 0);
-        bdef.type = BodyDef.BodyType.StaticBody;
-        Body b2body = world.createBody(bdef);
+        BodyDef bodyDefinition = new BodyDef();
+        bodyDefinition.position.set(0, 0);
+        bodyDefinition.type = BodyDef.BodyType.StaticBody;
+        Body b2body = world.createBody(bodyDefinition);
 
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef fixtureDefinition = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        //shape.setAsBox(1 * Config.PPM, viewport.getWorldHeight());
-        shape.setAsBox(1, viewport.getWorldHeight());
+        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight());
 
-        fdef.shape = shape;
-        b2body.createFixture(fdef);
+        fixtureDefinition.shape = shape;
+        b2body.createFixture(fixtureDefinition);
 
         shape.dispose();
     }
 
     private void initRight(Viewport viewport, World world) {
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(viewport.getWorldWidth(), 0);
-        bdef.type = BodyDef.BodyType.StaticBody;
-        Body b2body = world.createBody(bdef);
+        BodyDef bodyDefinition = new BodyDef();
+        bodyDefinition.position.set(viewport.getWorldWidth(), 0);
+        bodyDefinition.type = BodyDef.BodyType.StaticBody;
+        Body b2body = world.createBody(bodyDefinition);
 
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef fixtureDefinition = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        //shape.setAsBox(1 * Config.PPM, viewport.getWorldHeight());
-        shape.setAsBox(1, viewport.getWorldHeight());
+        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight());
 
-        fdef.shape = shape;
-        b2body.createFixture(fdef);
+        fixtureDefinition.shape = shape;
+        b2body.createFixture(fixtureDefinition);
 
         shape.dispose();
     }
