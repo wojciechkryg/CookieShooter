@@ -20,8 +20,8 @@ public class PlayState extends State {
     private Box2DDebugRenderer b2dr;
     private Player player;
 
-    protected PlayState(GameStateManager gameStateManager) {
-        super(gameStateManager);
+    protected PlayState() {
+        super();
 
         world = new World(new Vector2(0, -10), true);
         viewport = new FitViewport(Gdx.graphics.getWidth() / Config.PPM, Gdx.graphics.getHeight() / Config.PPM, cam);
@@ -71,7 +71,7 @@ public class PlayState extends State {
     private void handleKeyInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             // TODO: pause current state
-            gameStateManager.set(new MenuState(gameStateManager));
+            GameStateManager.getInstance().set(new MenuState());
         }
     }
 

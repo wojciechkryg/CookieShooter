@@ -4,12 +4,26 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Stack;
 
-public class GameStateManager {
+public final class GameStateManager {
 
-    private Stack<State> states;
+    //region Private variables
 
-    public GameStateManager() {
-        states = new Stack<State>();
+    private static GameStateManager instance;
+
+    private static Stack<State> states = new Stack<State>();
+
+    //endregion Private variables
+
+    //region Constructors
+
+    private GameStateManager() {};
+
+    //endregion Constructors
+
+    //region Public methods
+
+    public static GameStateManager getInstance() {
+        return instance = instance != null ? instance : new GameStateManager();
     }
 
     public void push(State state) {
@@ -36,4 +50,6 @@ public class GameStateManager {
     public void resize(int width, int height) {
         states.peek().resize(width, height);
     }
+
+    //endregion Public methods
 }

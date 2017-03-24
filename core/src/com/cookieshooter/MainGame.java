@@ -1,6 +1,7 @@
 package com.cookieshooter;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,29 +18,27 @@ import com.cookieshooter.utils.Border;
 
 public class MainGame extends ApplicationAdapter {
     private static SpriteBatch batch;
-    private GameStateManager gameStateManager;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        gameStateManager = new GameStateManager();
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
-        gameStateManager.push(new MenuState(gameStateManager));
+        GameStateManager.getInstance().push(new MenuState());
         configure();
     }
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-        gameStateManager.resize(width, height);
+        GameStateManager.getInstance().resize(width, height);
     }
 
     @Override
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameStateManager.update(Gdx.graphics.getDeltaTime());
-        gameStateManager.render(batch);
+        GameStateManager.getInstance().update(Gdx.graphics.getDeltaTime());
+        GameStateManager.getInstance().render(batch);
     }
 
     @Override

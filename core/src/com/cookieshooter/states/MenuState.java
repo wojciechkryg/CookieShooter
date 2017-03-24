@@ -19,8 +19,8 @@ public class MenuState extends State {
     private ImageButton playButton;
     private Stage stage;
 
-    public MenuState(GameStateManager gameStateManager) {
-        super(gameStateManager);
+    public MenuState() {
+        super();
         playBtn = new Texture(AssetsPath.MENU_START);
         drawable = new TextureRegionDrawable(new TextureRegion(playBtn));
         playButton = new ImageButton(drawable);
@@ -68,7 +68,7 @@ public class MenuState extends State {
     }
 
     private boolean playclick() {
-        gameStateManager.set(new PlayState(gameStateManager));
+        GameStateManager.getInstance().set(new PlayState());
         dispose();
         return false;
     }
