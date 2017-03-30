@@ -8,4 +8,6 @@ public class AssetsPath {
     public final static String MENU_START = "right.png";
 
     //endregion Menu
+
+    public final static String PLAYER = "badlogic.jpg";
 }

@@ -42,14 +42,16 @@ public class PlayState extends State {
     public void update(float deltaTime) {
         handleInput();
         world.step(1 / 45f, 6, 2);
+        player.update();
         cam.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         cam.update();
+        b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
     }
 
     @Override
     public void render(SpriteBatch batch) {
         batch.begin();
-        b2dr.render(world, cam.combined);
+        player.draw(batch);
         batch.end();
     }
 

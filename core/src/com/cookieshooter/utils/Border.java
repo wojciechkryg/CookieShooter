@@ -24,7 +24,7 @@ public class Border {
 
         FixtureDef fixtureDefinition = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(viewport.getWorldWidth() , 1 / Config.PPM);
+        shape.setAsBox(viewport.getWorldWidth(), 1 / Config.PPM);
 
         fixtureDefinition.shape = shape;
         b2body.createFixture(fixtureDefinition);
