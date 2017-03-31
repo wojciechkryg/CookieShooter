@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -14,6 +15,7 @@ import com.cookieshooter.common.AssetsPath;
 
 public class MenuState extends State {
 
+    private Texture logo;
     private Texture playBtn;
     private Drawable drawable;
     private ImageButton playButton;
@@ -21,13 +23,23 @@ public class MenuState extends State {
 
     public MenuState() {
         super();
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+
+        float startX = Gdx.graphics.getWidth();
+        float startY = Gdx.graphics.getHeight();
+
+        logo = new Texture(AssetsPath.LOGO);
+        TextureRegion region = new TextureRegion(logo,0,0,logo.getWidth(),(int)startY/8*7);
+        Image actor = new Image(region);
+        stage.addActor(actor);
+
         playBtn = new Texture(AssetsPath.MENU_START);
         drawable = new TextureRegionDrawable(new TextureRegion(playBtn));
         playButton = new ImageButton(drawable);
         playButton.addListener(getPlayEventListener());
-        stage = new Stage();
+        playButton.setPosition(startX/2-playButton.getWidth()/2,startY/3-playButton.getHeight()/2);
         stage.addActor(playButton);
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
