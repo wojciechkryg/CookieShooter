@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class Object {
 
+    //region Protected variables
+
     protected Viewport viewport;
     protected World world;
 
@@ -16,10 +18,18 @@ public abstract class Object {
     protected Texture texture;
     protected Sprite sprite;
 
+    //endregion Protected variables
+
+    //region Constructors
+
     protected Object(Viewport viewport, World world) {
         this.viewport = viewport;
         this.world = world;
     }
+
+    //endregion Constructors
+
+    //region Abstract methods
 
     public abstract void move(float acceleration);
 
@@ -28,4 +38,8 @@ public abstract class Object {
     public abstract void draw(SpriteBatch batch);
 
     public abstract void dispose();
+
+    public abstract void handleInput();
+
+    //endregion Abstract methods
 }

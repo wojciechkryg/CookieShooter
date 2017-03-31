@@ -33,7 +33,6 @@ public class PlayState extends State {
 
     @Override
     protected void handleInput() {
-        handleAccelerometerInput();
         handleKeyInput();
     }
 
@@ -66,18 +65,10 @@ public class PlayState extends State {
         player.dispose();
     }
 
-    private void handleAccelerometerInput() {
-        movePlayer(Gdx.input.getAccelerometerX());
-    }
-
     private void handleKeyInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             // TODO: pause current state
             GameStateManager.getInstance().set(new MenuState());
         }
-    }
-
-    private void movePlayer(float rotationRate) {
-        player.move(-1 * rotationRate);
     }
 }

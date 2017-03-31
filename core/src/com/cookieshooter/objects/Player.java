@@ -1,5 +1,6 @@
 package com.cookieshooter.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,12 +17,54 @@ import com.cookieshooter.objects.base.Object;
 
 public class Player extends Object {
 
+    //region Private variables
+
     private float width, height;
+
+    //endregion
+
+    //region Constructors
 
     public Player(Viewport viewport, World world) {
         super(viewport, world);
         init();
     }
+
+    //endregion Contructors
+
+    //region Public methods
+
+    //region Overrides
+
+    @Override
+    public void handleInput() {
+        move(getAcceleration(Gdx.input.getAccelerometerX()));
+    }
+
+    @Override
+    public void move(float acceleration) {
+        body.setLinearVelocity(new Vector2(acceleration * width * Config.SPEED, body.getLinearVelocity().y));
+    }
+
+    @Override
+    public void update() {
+        moveSprite();
+        handleInput();
+    }
+
+    //endregion Overrides
+
+    public void draw(SpriteBatch batch) {
+        batch.draw(sprite, sprite.getX(), sprite.getY(), width * Config.OBJECT_RATIO, height * Config.OBJECT_RATIO);
+    }
+
+    public void dispose() {
+        texture.dispose();
+    }
+
+    //endregion Public methods
+
+    //region Private methods
 
     private void init() {
         initSize();
@@ -56,13 +99,11 @@ public class Player extends Object {
         update();
     }
 
-    @Override
-    public void move(float acceleration) {
-        body.setLinearVelocity(new Vector2(acceleration * width * Config.SPEED, body.getLinearVelocity().y));
+    private float getAcceleration(float rotationRate) {
+        return -1 * rotationRate;
     }
 
-    @Override
-    public void update() {
+    private void moveSprite() {
         float spriteX = (body.getPosition().x - height) * Config.PPM;
         float spriteY = (body.getPosition().y - width) * Config.PPM;
         float rotation = (float) Math.toDegrees(body.getAngle());
@@ -71,12 +112,5 @@ public class Player extends Object {
         sprite.setRotation(rotation);
     }
 
-    public void draw(SpriteBatch batch) {
-        batch.draw(sprite, sprite.getX(), sprite.getY(), width * Config.OBJECT_RATIO, height * Config.OBJECT_RATIO);
-    }
-
-    public void dispose() {
-        texture.dispose();
-    }
-
+    //endregion Private methods
 }
