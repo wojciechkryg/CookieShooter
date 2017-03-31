@@ -31,15 +31,11 @@ public abstract class Object {
 
     //region Abstract methods
 
-    public abstract void move(float acceleration);
-
     public abstract void update();
 
     public abstract void draw(SpriteBatch batch);
 
     public abstract void dispose();
-
-    public abstract void handleInput();
 
     //endregion Abstract methods
 }

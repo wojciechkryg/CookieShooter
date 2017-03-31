@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.cookieshooter.objects.Bullet;
 import com.cookieshooter.objects.Player;
 import com.cookieshooter.common.Config;
 import com.cookieshooter.utils.Border;
@@ -18,6 +19,7 @@ public class PlayState extends State {
     private World world;
     private Box2DDebugRenderer b2dr;
     private Player player;
+    private Bullet bullet;
 
     protected PlayState() {
         super();
@@ -40,10 +42,10 @@ public class PlayState extends State {
     public void update(float deltaTime) {
         handleInput();
         world.step(1 / 45f, 6, 2);
-        player.update();
         cam.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         cam.update();
         b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
+        player.update();
     }
 
     @Override
@@ -57,7 +59,7 @@ public class PlayState extends State {
     public void resize(int width, int height) {
         viewport.update(width, height);
     }
-
+    
     @Override
     public void dispose() {
         world.dispose();

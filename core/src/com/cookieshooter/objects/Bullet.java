@@ -1,6 +1,5 @@
 package com.cookieshooter.objects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,28 +13,22 @@ import com.cookieshooter.common.AssetsPath;
 import com.cookieshooter.common.Config;
 import com.cookieshooter.objects.base.Object;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class Player extends Object {
+public class Bullet extends Object {
 
     //region Private variables
 
     private float width, height;
 
-    private List<Bullet> bullets = new ArrayList<Bullet>();
-
-    //endregion
+    //endregion Private variables
 
     //region Constructors
 
-    public Player(Viewport viewport, World world) {
+    public Bullet(Viewport viewport, World world) {
         super(viewport, world);
         init();
     }
 
-    //endregion Contructors
+    //endregion Constructors
 
     //region Public methods
 
@@ -43,9 +36,8 @@ public class Player extends Object {
 
     @Override
     public void update() {
+        moveBody();
         moveSprite();
-        handleInput();
-        updateBullets();
     }
 
     @Override
@@ -56,15 +48,9 @@ public class Player extends Object {
     @Override
     public void dispose() {
         texture.dispose();
-        //todo: dispose bullets
     }
 
     //endregion Overrides
-
-    public void handleInput() {
-        handleAccelerationInput();
-        handleTouchInput();
-    }
 
     //endregion Public methods
 
@@ -84,7 +70,7 @@ public class Player extends Object {
     private void initBody() {
         BodyDef bodyDefinition = new BodyDef();
         bodyDefinition.position.set(viewport.getWorldWidth() / 2, height);
-        bodyDefinition.type = BodyDef.BodyType.DynamicBody;
+        bodyDefinition.type = BodyDef.BodyType.KinematicBody;
         body = world.createBody(bodyDefinition);
 
         FixtureDef fixtureDefinition = new FixtureDef();
@@ -98,17 +84,10 @@ public class Player extends Object {
     }
 
     private void initImage() {
+        // todo: texture is ignored
         texture = new Texture(AssetsPath.PLAYER);
         sprite = new Sprite(texture);
         update();
-    }
-
-    private float getAcceleration(float rotationRate) {
-        return -1 * rotationRate;
-    }
-
-    private void moveBody(float acceleration) {
-        body.setLinearVelocity(new Vector2(acceleration * width * Config.SPEED, body.getLinearVelocity().y));
     }
 
     private void moveSprite() {
@@ -120,25 +99,8 @@ public class Player extends Object {
         sprite.setRotation(rotation);
     }
 
-    private void handleAccelerationInput() {
-        moveBody(getAcceleration(Gdx.input.getAccelerometerX()));
-    }
-
-    private void handleTouchInput() {
-        if (Gdx.input.justTouched()) {
-            shot();
-        }
-    }
-
-    private void shot() {
-        // todo: set starting coords of bullet
-        bullets.add(new Bullet(viewport, world));
-    }
-
-    private void updateBullets() {
-        for (Bullet bullet : bullets) {
-            bullet.update();
-        }
+    private void moveBody() {
+        body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 7f*Config.SPEED));
     }
 
     //endregion Private methods
