@@ -11,7 +11,7 @@ public class AssetsPath {
 
     //region Game
 
-    public final static String PLAYER = "player.jpg";
+    public final static String PLAYER = "player.png";
     public final static String ENEMY = "enemy.png";
 
     //endregion Game
