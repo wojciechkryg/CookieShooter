@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public abstract class Character {
+public abstract class Object {
 
     protected Viewport viewport;
     protected World world;
@@ -16,7 +16,7 @@ public abstract class Character {
     protected Texture texture;
     protected Sprite sprite;
 
-    protected Character(Viewport viewport, World world) {
+    protected Object(Viewport viewport, World world) {
         this.viewport = viewport;
         this.world = world;
     }

@@ -11,19 +11,19 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.common.AssetsPath;
 import com.cookieshooter.common.Config;
-import com.cookieshooter.objects.base.Character;
+import com.cookieshooter.objects.base.Object;
 
 
-public class Player extends Character {
+public class Player extends Object {
 
     private float width, height;
 
     public Player(Viewport viewport, World world) {
         super(viewport, world);
-        initPlayer();
+        init();
     }
 
-    private void initPlayer() {
+    private void init() {
         initSize();
         initBody();
         initImage();
