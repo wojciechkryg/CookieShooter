@@ -70,7 +70,7 @@ public class MenuState extends State {
 
     @Override
     public void dispose() {
-        playBtn.dispose();
+        playBtn.dispose(); 
     }
 
 

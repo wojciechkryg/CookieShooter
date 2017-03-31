@@ -1,0 +1,75 @@
+package com.cookieshooter.objects;
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.cookieshooter.common.AssetsPath;
+import com.cookieshooter.common.Config;
+import com.cookieshooter.objects.base.Object;
+
+public class Enemy extends Object {
+
+    float radius;
+
+    public Enemy(Viewport viewport, World world) {
+        super(viewport, world);
+        init();
+    }
+
+    private void init() {
+        initSize();
+        initBody();
+        initImage();
+    }
+
+    private void initSize() {
+        radius = viewport.getWorldWidth() / Config.OBJECT_RATIO;
+    }
+
+    private void initBody() {
+        BodyDef bodyDefinition = new BodyDef();
+        bodyDefinition.position.set(viewport.getWorldWidth() / 2, radius + viewport.getWorldHeight());
+        bodyDefinition.type = BodyDef.BodyType.DynamicBody;
+        body = world.createBody(bodyDefinition);
+
+        FixtureDef fixtureDefinition = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(radius);
+
+        fixtureDefinition.shape = shape;
+        body.createFixture(fixtureDefinition);
+
+        shape.dispose();
+    }
+
+    private void initImage() {
+        texture = new Texture(AssetsPath.ENEMY);
+        sprite = new Sprite(texture);
+        update();
+    }
+
+    @Override
+    public void update() {
+        float spriteX = (body.getPosition().x - radius) * Config.PPM;
+        float spriteY = (body.getPosition().y - radius) * Config.PPM;
+        float rotation = (float) Math.toDegrees(body.getAngle());
+
+        sprite.setPosition(spriteX, spriteY);
+        sprite.setRotation(rotation);
+    }
+
+    @Override
+    public void draw(SpriteBatch batch) {
+        batch.draw(sprite, sprite.getX(), sprite.getY(), radius * Config.OBJECT_RATIO, radius * Config.OBJECT_RATIO);
+    }
+
+    @Override
+    public void dispose() {
+        texture.dispose();
+    }
+}

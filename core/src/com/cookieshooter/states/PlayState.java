@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.objects.Bullet;
 import com.cookieshooter.objects.Player;
 import com.cookieshooter.common.Config;
+import com.cookieshooter.objects.Enemy;
 import com.cookieshooter.utils.Border;
 
 public class PlayState extends State {
@@ -20,6 +21,7 @@ public class PlayState extends State {
     private Box2DDebugRenderer b2dr;
     private Player player;
     private Bullet bullet;
+    private Enemy enemy;
 
     protected PlayState() {
         super();
@@ -30,7 +32,9 @@ public class PlayState extends State {
         b2dr = new Box2DDebugRenderer();
 
         new Border().init(viewport, world);
+
         player = new Player(viewport, world);
+        enemy = new Enemy(viewport, world);
     }
 
     @Override
@@ -42,6 +46,8 @@ public class PlayState extends State {
     public void update(float deltaTime) {
         handleInput();
         world.step(1 / 45f, 6, 2);
+        player.update();
+        enemy.update();
         cam.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         cam.update();
         b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
@@ -52,6 +58,7 @@ public class PlayState extends State {
     public void render(SpriteBatch batch) {
         batch.begin();
         player.draw(batch);
+        enemy.draw(batch);
         batch.end();
     }
 
@@ -65,6 +72,7 @@ public class PlayState extends State {
         world.dispose();
         b2dr.dispose();
         player.dispose();
+        enemy.dispose();
     }
 
     private void handleKeyInput() {
