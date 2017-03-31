@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Scaling;
 import com.cookieshooter.common.AssetsPath;
 
 public class MenuState extends State {
@@ -30,8 +31,12 @@ public class MenuState extends State {
         float startY = Gdx.graphics.getHeight();
 
         logo = new Texture(AssetsPath.LOGO);
-        TextureRegion region = new TextureRegion(logo,0,0,logo.getWidth(),(int)startY/8*7);
-        Image actor = new Image(region);
+        drawable = new TextureRegionDrawable(new TextureRegion(logo));
+        float scale = startX/logo.getWidth();
+        drawable.setMinWidth(startX);
+        drawable.setMinHeight(logo.getHeight()*scale);
+        Image actor = new Image(drawable);
+        actor.setPosition(0,startY-(actor.getHeight()+startY/10));
         stage.addActor(actor);
 
         playBtn = new Texture(AssetsPath.MENU_START);
