@@ -70,23 +70,22 @@ public class MenuState extends State {
 
     @Override
     public void dispose() {
-        playBtn.dispose(); 
+        playBtn.dispose();
+        stage.dispose();
     }
-
 
     public EventListener getPlayEventListener() {
         EventListener eventListener = new EventListener() {
             @Override
             public boolean handle(Event event) {
-                return playclick();
+                return navigateToState(new PlayState());
             }
         };
         return eventListener;
     }
 
-    private boolean playclick() {
-        GameStateManager.getInstance().set(new PlayState());
-        dispose();
-        return false;
+    private boolean navigateToState(State state) {
+        GameStateManager.getInstance().set(state);
+        return true;
     }
 }

@@ -31,7 +31,10 @@ public final class GameStateManager {
     }
 
     public void pop() {
-        states.pop();
+        if (states.size() == 0) {
+            return;
+        }
+        states.pop().dispose();
     }
 
     public void set(State state) {

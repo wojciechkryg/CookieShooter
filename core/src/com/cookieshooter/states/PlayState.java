@@ -66,11 +66,9 @@ public class PlayState extends State {
     public void resize(int width, int height) {
         viewport.update(width, height);
     }
-    
+
     @Override
     public void dispose() {
-        world.dispose();
-        b2dr.dispose();
         player.dispose();
         enemy.dispose();
     }
