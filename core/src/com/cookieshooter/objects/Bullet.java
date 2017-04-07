@@ -70,7 +70,7 @@ public class Bullet extends Object {
     private void initBody() {
         BodyDef bodyDefinition = new BodyDef();
         bodyDefinition.position.set(viewport.getWorldWidth() / 2, height);
-        bodyDefinition.type = BodyDef.BodyType.KinematicBody;
+        bodyDefinition.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bodyDefinition);
 
         FixtureDef fixtureDefinition = new FixtureDef();

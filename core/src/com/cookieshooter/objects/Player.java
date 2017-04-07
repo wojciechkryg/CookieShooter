@@ -85,6 +85,9 @@ public class Player extends Object {
         BodyDef bodyDefinition = new BodyDef();
         bodyDefinition.position.set(viewport.getWorldWidth() / 2, height);
         bodyDefinition.type = BodyDef.BodyType.DynamicBody;
+        bodyDefinition.linearDamping = 0;
+        bodyDefinition.angularDamping = 0;
+
         body = world.createBody(bodyDefinition);
 
         FixtureDef fixtureDefinition = new FixtureDef();
@@ -92,7 +95,9 @@ public class Player extends Object {
         shape.setAsBox(width, height);
 
         fixtureDefinition.shape = shape;
+        fixtureDefinition.friction = 0;
         body.createFixture(fixtureDefinition);
+        body.setLinearVelocity(0, -10);
 
         shape.dispose();
     }

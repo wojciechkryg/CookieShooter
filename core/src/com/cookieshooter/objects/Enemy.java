@@ -3,6 +3,7 @@ package com.cookieshooter.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -11,10 +12,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.common.AssetsPath;
 import com.cookieshooter.common.Config;
 import com.cookieshooter.objects.base.Object;
+import com.cookieshooter.utils.RandomVector;
 
 public class Enemy extends Object {
 
-    float radius;
+    private Vector2 velocity;
+    private float radius;
 
     public Enemy(Viewport viewport, World world) {
         super(viewport, world);
@@ -23,6 +26,7 @@ public class Enemy extends Object {
 
     private void init() {
         initSize();
+        initVelocity();
         initBody();
         initImage();
     }
@@ -31,10 +35,16 @@ public class Enemy extends Object {
         radius = viewport.getWorldWidth() / Config.OBJECT_RATIO;
     }
 
+    private void initVelocity() {
+        velocity = new RandomVector(-20, 20, -30, 0);
+    }
+
     private void initBody() {
         BodyDef bodyDefinition = new BodyDef();
         bodyDefinition.position.set(viewport.getWorldWidth() / 2, radius + viewport.getWorldHeight());
         bodyDefinition.type = BodyDef.BodyType.DynamicBody;
+        bodyDefinition.angularDamping = 0;
+        bodyDefinition.linearDamping = 0;
         body = world.createBody(bodyDefinition);
 
         FixtureDef fixtureDefinition = new FixtureDef();
@@ -42,7 +52,10 @@ public class Enemy extends Object {
         shape.setRadius(radius);
 
         fixtureDefinition.shape = shape;
+        fixtureDefinition.friction = 0;
+        fixtureDefinition.restitution = 1;
         body.createFixture(fixtureDefinition);
+        body.setLinearVelocity(velocity);
 
         shape.dispose();
     }
