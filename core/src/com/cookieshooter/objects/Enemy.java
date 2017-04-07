@@ -36,7 +36,12 @@ public class Enemy extends Object {
     }
 
     private void initVelocity() {
-        velocity = new RandomVector(-20, 20, -30, 0);
+        int minX = Config.MIN_X;
+        int maxX = Config.MAX_X;
+        int minY = Config.MIN_Y;
+        int maxY = Config.MAX_Y;
+
+        velocity = new RandomVector(minX, maxX, minY, maxY);
     }
 
     private void initBody() {
