@@ -31,7 +31,7 @@ public abstract class Object {
 
     //region Abstract methods
 
-    public abstract void update();
+    public abstract void update(float deltaTime);
 
     public abstract void draw(SpriteBatch batch);
 

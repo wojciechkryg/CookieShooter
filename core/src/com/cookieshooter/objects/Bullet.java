@@ -35,7 +35,7 @@ public class Bullet extends Object {
     //region Overrides
 
     @Override
-    public void update() {
+    public void update(float deltaTime) {
         moveBody();
         moveSprite();
     }
@@ -87,7 +87,7 @@ public class Bullet extends Object {
         // todo: texture is ignored
         texture = new Texture(AssetsPath.PLAYER);
         sprite = new Sprite(texture);
-        update();
+        update(0);
     }
 
     private void moveSprite() {

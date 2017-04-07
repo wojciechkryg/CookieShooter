@@ -6,6 +6,8 @@ public class Config {
 
     public final static float SPEED = 5;
 
+    //region Objects
+
     //region Enemy
 
     public final static int MIN_X = -20;
@@ -14,5 +16,13 @@ public class Config {
     public final static int MAX_Y = -5;
 
     //endregion Enemy
+
+    //region Bullet
+
+    public final static float DEFAULT_FIRE_DELAY = 0.8f;
+
+    //endregion Bullet
+
+    //endregion Objects
 
 }

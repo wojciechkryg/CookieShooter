@@ -56,15 +56,15 @@ public class PlayState extends State {
         handleInput();
         world.step(1 / 45f, 6, 2);
 
-        player.update();
+        player.update(deltaTime);
         for (Enemy enemy : enemies) {
-            enemy.update();
+            enemy.update(deltaTime);
         }
 
         cam.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         cam.update();
         b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
-        player.update();
+        player.update(deltaTime);
     }
 
     @Override

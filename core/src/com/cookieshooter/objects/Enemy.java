@@ -68,11 +68,11 @@ public class Enemy extends Object {
     private void initImage() {
         texture = new Texture(AssetsPath.ENEMY);
         sprite = new Sprite(texture);
-        update();
+        update(0);
     }
 
     @Override
-    public void update() {
+    public void update(float deltaTime) {
         float spriteX = (body.getPosition().x - radius) * Config.PPM;
         float spriteY = (body.getPosition().y - radius) * Config.PPM;
         float rotation = (float) Math.toDegrees(body.getAngle());

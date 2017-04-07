@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -18,6 +17,8 @@ import com.cookieshooter.objects.base.Object;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.cookieshooter.common.Config.DEFAULT_FIRE_DELAY;
+
 
 public class Player extends Object {
 
@@ -26,6 +27,8 @@ public class Player extends Object {
     private float width, height;
 
     private List<Bullet> bullets = new ArrayList<Bullet>();
+
+    private float fireBulletDelay = DEFAULT_FIRE_DELAY;
 
     //endregion
 
@@ -43,10 +46,11 @@ public class Player extends Object {
     //region Overrides
 
     @Override
-    public void update() {
+    public void update(float deltaTime) {
         moveSprite();
         handleInput();
-        updateBullets();
+        updateBullets(deltaTime);
+        updateFireBulletDelay(deltaTime);
     }
 
     @Override
@@ -106,7 +110,7 @@ public class Player extends Object {
     private void initImage() {
         texture = new Texture(AssetsPath.PLAYER);
         sprite = new Sprite(texture);
-        update();
+        update(0);
     }
 
     private float getAcceleration(float rotationRate) {
@@ -132,17 +136,20 @@ public class Player extends Object {
 
     private void handleTouchInput() {
         if (Gdx.input.justTouched()) {
-            shot();
+            shoot();
         }
     }
 
-    private void shot() {
-        bullets.add(getBullet());
+    private void shoot() {
+        if (canShoot()) {
+            bullets.add(getBullet());
+            fireBulletDelay = DEFAULT_FIRE_DELAY;
+        }
     }
 
-    private void updateBullets() {
+    private void updateBullets(float deltaTime) {
         for (Bullet bullet : bullets) {
-            bullet.update();
+            bullet.update(deltaTime);
         }
     }
 
@@ -155,6 +162,14 @@ public class Player extends Object {
                 body.getPosition().x,
                 body.getPosition().y + (2*height)
         );
+    }
+
+    private void updateFireBulletDelay(float deltaTime) {
+        fireBulletDelay -= deltaTime;
+    }
+
+    private boolean canShoot() {
+        return fireBulletDelay < 0;
     }
 
     //endregion Private methods
