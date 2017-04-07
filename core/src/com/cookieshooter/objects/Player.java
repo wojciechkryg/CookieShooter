@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -136,14 +137,24 @@ public class Player extends Object {
     }
 
     private void shot() {
-        // todo: set starting coords of bullet
-        bullets.add(new Bullet(viewport, world));
+        bullets.add(getBullet());
     }
 
     private void updateBullets() {
         for (Bullet bullet : bullets) {
             bullet.update();
         }
+    }
+
+    private Bullet getBullet() {
+        return new Bullet(viewport, world, getBulletPosition());
+    }
+
+    private Vector2 getBulletPosition() {
+        return new Vector2(
+                body.getPosition().x,
+                body.getPosition().y + (2*height)
+        );
     }
 
     //endregion Private methods

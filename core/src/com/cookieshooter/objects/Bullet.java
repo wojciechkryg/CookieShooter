@@ -23,9 +23,9 @@ public class Bullet extends Object {
 
     //region Constructors
 
-    public Bullet(Viewport viewport, World world) {
+    public Bullet(Viewport viewport, World world, Vector2 position) {
         super(viewport, world);
-        init();
+        init(position);
     }
 
     //endregion Constructors
@@ -56,9 +56,9 @@ public class Bullet extends Object {
 
     //region Private methods
 
-    private void init() {
+    private void init(Vector2 position) {
         initSize();
-        initBody();
+        initBody(position);
         initImage();
     }
 
@@ -67,9 +67,9 @@ public class Bullet extends Object {
         height = viewport.getWorldWidth() / Config.OBJECT_RATIO;
     }
 
-    private void initBody() {
+    private void initBody(Vector2 position) {
         BodyDef bodyDefinition = new BodyDef();
-        bodyDefinition.position.set(viewport.getWorldWidth() / 2, height);
+        bodyDefinition.position.set(position.x, position.y);
         bodyDefinition.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bodyDefinition);
 
