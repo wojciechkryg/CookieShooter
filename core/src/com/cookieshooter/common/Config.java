@@ -19,6 +19,7 @@ public class Config {
 
     //region Bullet
 
+    public final static float BULLET_RATIO = 100;
     public final static float DEFAULT_FIRE_DELAY = 0.8f;
 
     //endregion Bullet

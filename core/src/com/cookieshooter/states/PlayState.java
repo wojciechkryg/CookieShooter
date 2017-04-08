@@ -56,25 +56,18 @@ public class PlayState extends State {
         handleInput();
         world.step(1 / 45f, 6, 2);
 
-        player.update(deltaTime);
-        for (Enemy enemy : enemies) {
-            enemy.update(deltaTime);
-        }
+        updateObjects(deltaTime);
 
         cam.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         cam.update();
         b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
-        player.update(deltaTime);
     }
 
     @Override
     public void render(SpriteBatch batch) {
         batch.begin();
 
-        player.draw(batch);
-        for (Enemy enemy : enemies) {
-            enemy.draw(batch);
-        }
+        renderObjects(batch);
 
         batch.end();
     }
@@ -96,6 +89,20 @@ public class PlayState extends State {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             // TODO: pause current state
             GameStateManager.getInstance().set(new MenuState());
+        }
+    }
+
+    private void updateObjects(float deltaTime) {
+        player.update(deltaTime);
+        for (Enemy enemy : enemies) {
+            enemy.update(deltaTime);
+        }
+    }
+
+    private void renderObjects(SpriteBatch batch) {
+        player.draw(batch);
+        for (Enemy enemy : enemies) {
+            enemy.draw(batch);
         }
     }
 }

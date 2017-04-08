@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -17,7 +18,7 @@ public class Bullet extends Object {
 
     //region Private variables
 
-    private float width, height;
+    private float radius;
 
     //endregion Private variables
 
@@ -42,7 +43,7 @@ public class Bullet extends Object {
 
     @Override
     public void draw(SpriteBatch batch) {
-        batch.draw(sprite, sprite.getX(), sprite.getY(), width * Config.OBJECT_RATIO, height * Config.OBJECT_RATIO);
+        batch.draw(sprite, sprite.getX(), sprite.getY(), radius * Config.BULLET_RATIO, radius * Config.BULLET_RATIO);
     }
 
     @Override
@@ -63,8 +64,7 @@ public class Bullet extends Object {
     }
 
     private void initSize() {
-        width = viewport.getWorldWidth() / Config.OBJECT_RATIO;
-        height = viewport.getWorldWidth() / Config.OBJECT_RATIO;
+        radius = viewport.getWorldWidth() / Config.BULLET_RATIO;
     }
 
     private void initBody(Vector2 position) {
@@ -74,8 +74,8 @@ public class Bullet extends Object {
         body = world.createBody(bodyDefinition);
 
         FixtureDef fixtureDefinition = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(width, height);
+        CircleShape shape = new CircleShape();
+        shape.setRadius(radius);
 
         fixtureDefinition.shape = shape;
         body.createFixture(fixtureDefinition);
@@ -91,8 +91,8 @@ public class Bullet extends Object {
     }
 
     private void moveSprite() {
-        float spriteX = (body.getPosition().x - height) * Config.PPM;
-        float spriteY = (body.getPosition().y - width) * Config.PPM;
+        float spriteX = (body.getPosition().x - radius) * Config.PPM;
+        float spriteY = (body.getPosition().y - radius) * Config.PPM;
         float rotation = (float) Math.toDegrees(body.getAngle());
 
         sprite.setPosition(spriteX, spriteY);
