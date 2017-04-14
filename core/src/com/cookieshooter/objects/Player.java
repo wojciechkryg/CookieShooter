@@ -15,6 +15,7 @@ import com.cookieshooter.common.Config;
 import com.cookieshooter.objects.base.Object;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.cookieshooter.common.Config.DEFAULT_FIRE_DELAY;
@@ -148,7 +149,13 @@ public class Player extends Object {
     }
 
     private void updateBullets(float deltaTime) {
-        for (Bullet bullet : bullets) {
+        for (Iterator<Bullet> bulletIterator = bullets.iterator(); bulletIterator.hasNext();) {
+            Bullet bullet = bulletIterator.next();
+            if (bullet.isOutOfViewport()) {
+                bullet.dispose();
+                bulletIterator.remove();
+                continue;
+            }
             bullet.update(deltaTime);
         }
     }

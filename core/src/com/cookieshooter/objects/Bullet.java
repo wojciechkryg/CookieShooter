@@ -1,5 +1,6 @@
 package com.cookieshooter.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,6 +33,10 @@ public class Bullet extends Object {
     //endregion Constructors
 
     //region Public methods
+
+    public boolean isOutOfViewport() {
+        return body.getPosition().y > viewport.getWorldHeight();
+    }
 
     //region Overrides
 
