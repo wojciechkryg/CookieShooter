@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.objects.Bullet;
@@ -13,6 +14,8 @@ import com.cookieshooter.objects.Player;
 import com.cookieshooter.common.Config;
 import com.cookieshooter.objects.Enemy;
 import com.cookieshooter.utils.Border;
+import com.cookieshooter.utils.Ground;
+import com.cookieshooter.utils.ListenerClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +33,13 @@ public class PlayState extends State {
 
         world = new World(new Vector2(0, 0), true);
         World.setVelocityThreshold(0);
+        world.setContactListener(new ListenerClass());
         viewport = new FitViewport(Gdx.graphics.getWidth() / Config.PPM, Gdx.graphics.getHeight() / Config.PPM, cam);
         cam.setToOrtho(false, viewport.getWorldWidth(), viewport.getWorldHeight());
         b2dr = new Box2DDebugRenderer();
 
         new Border().init(viewport, world);
+        new Ground().init(viewport,world);
 
         player = new Player(viewport, world);
 

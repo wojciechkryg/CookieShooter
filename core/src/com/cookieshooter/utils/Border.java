@@ -11,25 +11,8 @@ import com.cookieshooter.common.Config;
 public class Border {
 
     public void init(Viewport viewport, World world) {
-        initBottom(viewport, world);
         initLeft(viewport, world);
         initRight(viewport, world);
-    }
-
-    private void initBottom(Viewport viewport, World world) {
-        BodyDef bodyDefinition = new BodyDef();
-        bodyDefinition.position.set(0, 0);
-        bodyDefinition.type = BodyDef.BodyType.StaticBody;
-        Body b2body = world.createBody(bodyDefinition);
-
-        FixtureDef fixtureDefinition = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(viewport.getWorldWidth(), 1 / Config.PPM);
-
-        fixtureDefinition.shape = shape;
-        b2body.createFixture(fixtureDefinition);
-
-        shape.dispose();
     }
 
     private void initLeft(Viewport viewport, World world) {

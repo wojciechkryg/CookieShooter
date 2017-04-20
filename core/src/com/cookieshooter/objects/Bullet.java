@@ -56,6 +56,11 @@ public class Bullet extends Object {
         texture.dispose();
     }
 
+    @Override
+    public void destroy() {
+
+    }
+
     //endregion Overrides
 
     //endregion Public methods

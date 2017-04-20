@@ -61,6 +61,7 @@ public class Enemy extends Object {
         fixtureDefinition.restitution = 1;
         body.createFixture(fixtureDefinition);
         body.setLinearVelocity(velocity);
+        body.setUserData(this);
 
         shape.dispose();
     }
@@ -89,5 +90,12 @@ public class Enemy extends Object {
     @Override
     public void dispose() {
         texture.dispose();
+        world.destroyBody(body);
     }
+
+    @Override
+    public void destroy() {
+        dispose();
+    }
+
 }

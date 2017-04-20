@@ -65,6 +65,10 @@ public class Player extends Object {
         //todo: dispose bullets
     }
 
+    @Override
+    public void destroy() {
+
+    }
     //endregion Overrides
 
     public void handleInput() {
@@ -80,6 +84,7 @@ public class Player extends Object {
         initSize();
         initBody();
         initImage();
+
     }
 
     private void initSize() {
@@ -104,6 +109,7 @@ public class Player extends Object {
         fixtureDefinition.friction = 0;
         body.createFixture(fixtureDefinition);
         body.setLinearVelocity(0, -10);
+        body.setUserData(this);
 
         shape.dispose();
     }
