@@ -14,23 +14,24 @@ import com.cookieshooter.objects.Player;
 import org.w3c.dom.Entity;
 import org.w3c.dom.UserDataHandler;
 
-/**
- * Created by Hanna on 07.04.2017.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ListenerClass implements ContactListener {
+
     @Override
     public void beginContact(Contact contact) {
         Object userA = contact.getFixtureA().getBody().getUserData();
         Object userB = contact.getFixtureB().getBody().getUserData();
         if ((userA instanceof Player && userB instanceof Enemy)) {
-
+            ((Enemy)userB).setIsToDestroy(true);
         } else if (userB instanceof Player && userA instanceof Enemy) {
-
+            ((Enemy)userA).setIsToDestroy(true);
         } else if (userA instanceof Enemy && userB instanceof Ground) {
-
-        }else if(userB instanceof Enemy && userA instanceof Ground) {
-
+            ((Enemy)userA).setIsToDestroy(true);
+        } else if (userB instanceof Enemy && userA instanceof Ground) {
+            ((Enemy)userB).setIsToDestroy(true);
         }
     }
 

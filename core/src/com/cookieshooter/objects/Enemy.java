@@ -18,6 +18,7 @@ public class Enemy extends Object {
 
     private Vector2 velocity;
     private float radius;
+    protected Boolean isToDestroy;
 
     public Enemy(Viewport viewport, World world) {
         super(viewport, world);
@@ -29,6 +30,7 @@ public class Enemy extends Object {
         initVelocity();
         initBody();
         initImage();
+        isToDestroy = false;
     }
 
     private void initSize() {
@@ -90,12 +92,20 @@ public class Enemy extends Object {
     @Override
     public void dispose() {
         texture.dispose();
-        world.destroyBody(body);
     }
 
     @Override
     public void destroy() {
         dispose();
+        world.destroyBody(body);
+    }
+
+    public void setIsToDestroy(Boolean value) {
+        isToDestroy = value;
+    }
+
+    public Boolean getIsToDestroy() {
+        return isToDestroy;
     }
 
 }

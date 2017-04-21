@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.objects.Bullet;
@@ -17,6 +19,7 @@ import com.cookieshooter.utils.Ground;
 import com.cookieshooter.utils.ListenerClass;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class PlayState extends State {
@@ -59,6 +62,7 @@ public class PlayState extends State {
     public void update(float deltaTime) {
         handleInput();
         world.step(1 / 45f, 6, 2);
+        destroyEnemies();
 
         updateObjects(deltaTime);
 
@@ -108,5 +112,24 @@ public class PlayState extends State {
         for (Enemy enemy : enemies) {
             enemy.draw(batch);
         }
+    }
+    
+    private void destroyEnemies(){
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for (Iterator<Body> bodyIterator = bodies.iterator(); bodyIterator.hasNext();) {
+            Body body = bodyIterator.next();
+            if (body.getUserData() instanceof Enemy) {
+                Enemy enemy = (Enemy) body.getUserData();
+                if (enemy.getIsToDestroy()) {
+                    enemy.destroy();
+                    enemies.remove(enemy);
+                    bodyIterator.remove();
+                    continue;
+                }
+
+            }
+        }
+
     }
 }
