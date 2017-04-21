@@ -26,4 +26,10 @@ public class Config {
 
     //endregion Objects
 
+    //region Menu
+
+    public final static float BOTTOM_MARGIN = 10;
+
+    //endregion Menu
+
 }

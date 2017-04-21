@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.cookieshooter.common.AssetsPath;
+import com.cookieshooter.common.Config;
 
 public class Menu {
 
@@ -43,13 +44,21 @@ public class Menu {
     }
 
     public Actor getPlayButtonActor(EventListener eventListener) {
-        Texture playBtn = new Texture(AssetsPath.MENU_START);
-        Drawable drawable = getTextureDrawable(playBtn);
-        ImageButton playButton = new ImageButton(drawable);
-        playButton.addListener(eventListener);
-        playButton.setPosition(width / 2 - playButton.getWidth() / 2, height / 3 - playButton.getHeight() / 2);
+        Actor button = getImageButtonActor(AssetsPath.MENU_START_BUTTON);
 
-        return playButton;
+        button.addListener(eventListener);
+        button.setPosition(width / 2 - button.getWidth() / 2, height / 3 - button.getHeight() / 2);
+
+        return button;
+    }
+
+    public Actor getExitButtonActor(EventListener eventListener) {
+        Actor button = getImageButtonActor(AssetsPath.MENU_EXIT_BUTTON);
+
+        button.addListener(eventListener);
+        button.setPosition(width / 2 - button.getWidth() / 2, Config.BOTTOM_MARGIN);
+
+        return button;
     }
 
     //endregion Public methods
@@ -58,6 +67,12 @@ public class Menu {
 
     private TextureRegionDrawable getTextureDrawable(Texture texture) {
         return new TextureRegionDrawable(new TextureRegion(texture));
+    }
+
+
+    private Actor getImageButtonActor(String assetPath) {
+        Texture buttonTexture = new Texture(assetPath);
+        return new ImageButton(getTextureDrawable(buttonTexture));
     }
 
     //endregion Private methods

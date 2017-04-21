@@ -19,10 +19,11 @@ public class MenuState extends State {
         createActors(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
-    public void createActors(float startX, float startY) {
-        Menu menu = new Menu(startX, startY);
+    public void createActors(float width, float height) {
+        Menu menu = new Menu(width, height);
         stage.addActor(menu.getLogoActor());
-        stage.addActor(menu.getPlayButtonActor(getPlayEventListener()));
+        stage.addActor(menu.getPlayButtonActor(getOnPlayButtonClickedListener()));
+        stage.addActor(menu.getExitButtonActor(getOnExitButtonClickedListener()));
     }
 
     @Override
@@ -51,7 +52,7 @@ public class MenuState extends State {
         stage.dispose();
     }
 
-    public EventListener getPlayEventListener() {
+    private EventListener getOnPlayButtonClickedListener() {
         EventListener eventListener = new EventListener() {
             @Override
             public boolean handle(Event event) {
@@ -64,5 +65,15 @@ public class MenuState extends State {
     private boolean navigateToState(State state) {
         GameStateManager.getInstance().set(state);
         return true;
+    }
+
+    private EventListener getOnExitButtonClickedListener() {
+        return new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                Gdx.app.exit();
+                return true;
+            }
+        };
     }
 }
