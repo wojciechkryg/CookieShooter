@@ -2,6 +2,7 @@ package com.cookieshooter.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -15,6 +16,7 @@ import com.cookieshooter.objects.Enemy;
 import com.cookieshooter.utils.Border;
 import com.cookieshooter.utils.Ground;
 import com.cookieshooter.utils.ListenerClass;
+import com.cookieshooter.utils.StatsBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +25,14 @@ public class PlayState extends State {
 
     private Viewport viewport;
     private World world;
+    private StatsBar statsBar;
     private Box2DDebugRenderer b2dr;
     private Player player;
     private List<Enemy> enemies;
 
     protected PlayState() {
         super();
+        statsBar = new StatsBar();
 
         world = new World(new Vector2(0, 0), true);
         World.setVelocityThreshold(0);
@@ -74,6 +78,8 @@ public class PlayState extends State {
         renderObjects(batch);
 
         batch.end();
+
+        statsBar.drawStatsBar(batch, 0);
     }
 
     @Override

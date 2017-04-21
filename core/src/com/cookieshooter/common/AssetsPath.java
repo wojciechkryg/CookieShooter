@@ -9,6 +9,12 @@ public class AssetsPath {
 
     //endregion Menu
 
+    //region Font
+
+    public final static String OPENSANS = "font/opensans.ttf";
+
+    //endregion Font
+
     //region Game
 
     public final static String PLAYER = "player.png";

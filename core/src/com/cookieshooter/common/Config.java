@@ -2,11 +2,20 @@ package com.cookieshooter.common;
 
 public class Config {
     public final static float PPM = 10; // Pixel Per Meter
-    public final static float OBJECT_RATIO = 20;
 
     public final static float SPEED = 5;
 
+    //region StatsBar
+    public final static float STATSBAR_RATIO = 10;
+    public final static float BACKGROUND_R = 38/255f;
+    public final static float BACKGROUND_G = 125/255f;
+    public final static float BACKGROUND_B = 171/255f;
+
+    //endregion StatsBar
+
     //region Objects
+
+    public final static float OBJECT_RATIO = 20;
 
     //region Enemy
 
