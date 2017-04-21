@@ -28,7 +28,7 @@ public class Config {
 
     //region Menu
 
-    public final static float BOTTOM_MARGIN = 10;
+    public final static float MENU_BOTTOM_MARGIN = 10;
 
     //endregion Menu
 

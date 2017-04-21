@@ -56,7 +56,7 @@ public class Menu {
         Actor button = getImageButtonActor(AssetsPath.MENU_EXIT_BUTTON);
 
         button.addListener(eventListener);
-        button.setPosition(width / 2 - button.getWidth() / 2, Config.BOTTOM_MARGIN);
+        button.setPosition(width / 2 - button.getWidth() / 2, Config.MENU_BOTTOM_MARGIN);
 
         return button;
     }
