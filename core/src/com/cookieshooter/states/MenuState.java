@@ -53,13 +53,12 @@ public class MenuState extends State {
     }
 
     private EventListener getOnPlayButtonClickedListener() {
-        EventListener eventListener = new EventListener() {
+        return new EventListener() {
             @Override
             public boolean handle(Event event) {
                 return navigateToState(new PlayState());
             }
         };
-        return eventListener;
     }
 
     private boolean navigateToState(State state) {

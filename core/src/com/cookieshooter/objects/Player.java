@@ -40,7 +40,7 @@ public class Player extends Object {
         init();
     }
 
-    //endregion Contructors
+    //endregion Constructors
 
     //region Public methods
 
