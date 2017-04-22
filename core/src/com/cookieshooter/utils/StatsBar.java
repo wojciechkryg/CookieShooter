@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.cookieshooter.common.AssetsPath;
 import com.cookieshooter.common.Config;
 
+import static com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.*;
+
 public class StatsBar {
 
     private float width, height;
@@ -21,6 +23,11 @@ public class StatsBar {
     private BitmapFont bitmapFont;
 
     public StatsBar() {
+        initStatsBar();
+        initFont();
+    }
+
+    private void initStatsBar() {
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight() / Config.STATSBAR_RATIO;
         x = 0;
@@ -29,18 +36,10 @@ public class StatsBar {
         shapeRenderer = new ShapeRenderer();
 
         backgroundColor = new Color(Config.BACKGROUND_R, Config.BACKGROUND_G, Config.BACKGROUND_B, 1);
-
-        initFont();
     }
 
     private void initFont() {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(AssetsPath.OPENSANS));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 32;
-        parameter.borderWidth = 1;
-        bitmapFont = generator.generateFont(parameter);
-        generator.dispose();
-
+        bitmapFont = FontHelper.getInstance().getFont32();
         bitmapFont.setColor(Color.WHITE);
     }
 

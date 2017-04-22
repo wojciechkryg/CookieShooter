@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.cookieshooter.states.GameStateManager;
 import com.cookieshooter.states.MenuState;
+import com.cookieshooter.utils.FontHelper;
 
 
 public class MainGame extends ApplicationAdapter {
@@ -14,6 +15,8 @@ public class MainGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
+
+        FontHelper.getInstance().initFonts();
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         GameStateManager.getInstance().push(new MenuState());
