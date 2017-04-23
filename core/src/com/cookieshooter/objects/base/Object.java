@@ -19,6 +19,8 @@ public abstract class Object {
     protected Texture texture;
     protected Sprite sprite;
 
+    protected Boolean isToDestroy;
+
     //endregion Protected variables
 
     //region Constructors

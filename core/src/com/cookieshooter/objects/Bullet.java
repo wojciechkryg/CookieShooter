@@ -58,7 +58,8 @@ public class Bullet extends Object {
 
     @Override
     public void destroy() {
-
+        dispose();
+        world.destroyBody(body);
     }
 
     //endregion Overrides
@@ -71,6 +72,7 @@ public class Bullet extends Object {
         initSize();
         initBody(position);
         initImage();
+        isToDestroy = false;
     }
 
     private void initSize() {
@@ -89,6 +91,7 @@ public class Bullet extends Object {
 
         fixtureDefinition.shape = shape;
         body.createFixture(fixtureDefinition);
+        body.setUserData(this);
 
         shape.dispose();
     }
@@ -110,7 +113,15 @@ public class Bullet extends Object {
     }
 
     private void moveBody() {
-        body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 7f*Config.SPEED));
+        body.setLinearVelocity(new Vector2(body.getLinearVelocity().x, 7f * Config.SPEED));
+    }
+
+    public void setIsToDestroy(Boolean value) {
+        isToDestroy = value;
+    }
+
+    public Boolean getIsToDestroy() {
+        return isToDestroy;
     }
 
     //endregion Private methods

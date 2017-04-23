@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.cookieshooter.objects.Bullet;
 import com.cookieshooter.objects.Enemy;
 import com.cookieshooter.objects.Player;
 
@@ -32,6 +33,13 @@ public class ListenerClass implements ContactListener {
             ((Enemy)userA).setIsToDestroy(true);
         } else if (userB instanceof Enemy && userA instanceof Ground) {
             ((Enemy)userB).setIsToDestroy(true);
+        }else if (userB instanceof Enemy && userA instanceof Bullet) {
+            ((Bullet)userA).setIsToDestroy(true);
+            ((Enemy)userB).setIsToDestroy(true);
+        }
+        else if (userA instanceof Enemy && userB instanceof Bullet) {
+            ((Bullet)userB).setIsToDestroy(true);
+            ((Enemy)userA).setIsToDestroy(true);
         }
     }
 

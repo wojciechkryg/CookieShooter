@@ -18,7 +18,7 @@ public class Enemy extends Object {
 
     private Vector2 velocity;
     private float radius;
-    protected Boolean isToDestroy;
+
 
     public Enemy(Viewport viewport, World world) {
         super(viewport, world);

@@ -83,7 +83,7 @@ public class PlayState extends State {
 
         batch.end();
 
-        statsBar.drawStatsBar(batch, 0);
+        statsBar.drawStatsBar(batch, player.getPoints());
     }
 
     @Override
@@ -133,7 +133,12 @@ public class PlayState extends State {
                     bodyIterator.remove();
                     continue;
                 }
-
+            }else if(body.getUserData() instanceof Bullet){
+                Bullet bullet = (Bullet) body.getUserData();
+                if(bullet.getIsToDestroy()) {
+                    bullet.destroy();
+                    player.addPoints(1);
+                }
             }
         }
 

@@ -31,6 +31,8 @@ public class Player extends Object {
 
     private float fireBulletDelay = DEFAULT_FIRE_DELAY;
 
+    private int points;
+
     //endregion
 
     //region Constructors
@@ -84,7 +86,7 @@ public class Player extends Object {
         initSize();
         initBody();
         initImage();
-
+        points = 0;
     }
 
     private void initSize() {
@@ -157,8 +159,8 @@ public class Player extends Object {
     private void updateBullets(float deltaTime) {
         for (Iterator<Bullet> bulletIterator = bullets.iterator(); bulletIterator.hasNext();) {
             Bullet bullet = bulletIterator.next();
-            if (bullet.isOutOfViewport()) {
-                bullet.dispose();
+            if (bullet.isOutOfViewport() || bullet.getIsToDestroy()) {
+                bullet.destroy();
                 bulletIterator.remove();
                 continue;
             }
@@ -183,6 +185,14 @@ public class Player extends Object {
 
     private boolean canShoot() {
         return fireBulletDelay < 0;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void addPoints(int points){
+        this.points += points;
     }
 
     //endregion Private methods
