@@ -8,10 +8,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.common.Config;
 
-/**
- * Created by Hanna on 07.04.2017.
- */
-
 public class Ground {
     public void init(Viewport viewport, World world) {
         initBottom(viewport, world);

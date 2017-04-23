@@ -16,7 +16,7 @@ public final class GameStateManager {
 
     //region Constructors
 
-    private GameStateManager() {};
+    private GameStateManager() {}
 
     //endregion Constructors
 
