@@ -78,6 +78,15 @@ public class Player extends Object {
         handleTouchInput();
     }
 
+    public int getPoints() {
+        return points;
+    }
+
+    public void addPoints(int points){
+        this.points += points;
+    }
+
+
     //endregion Public methods
 
     //region Private methods
@@ -159,7 +168,13 @@ public class Player extends Object {
     private void updateBullets(float deltaTime) {
         for (Iterator<Bullet> bulletIterator = bullets.iterator(); bulletIterator.hasNext();) {
             Bullet bullet = bulletIterator.next();
-            if (bullet.isOutOfViewport() || bullet.getIsToDestroy()) {
+            if (bullet.isOutOfViewport() ) {
+                bullet.destroy();
+                bulletIterator.remove();
+                continue;
+            }
+            else if(bullet.getIsToDestroy()){
+                addPoints(1);
                 bullet.destroy();
                 bulletIterator.remove();
                 continue;
@@ -187,13 +202,6 @@ public class Player extends Object {
         return fireBulletDelay < 0;
     }
 
-    public int getPoints() {
-        return points;
-    }
-
-    public void addPoints(int points){
-        this.points += points;
-    }
 
     //endregion Private methods
 }

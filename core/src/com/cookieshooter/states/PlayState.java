@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.common.Config;
+import com.cookieshooter.objects.Bullet;
 import com.cookieshooter.objects.Enemy;
 import com.cookieshooter.objects.Player;
 import com.cookieshooter.utils.Border;
@@ -119,26 +120,14 @@ public class PlayState extends State {
     }
     
     private void destroyEnemies(){
-        Array<Body> bodies = new Array<Body>();
-        world.getBodies(bodies);
-        for (Iterator<Body> bodyIterator = bodies.iterator(); bodyIterator.hasNext();) {
-            Body body = bodyIterator.next();
-            if (body.getUserData() instanceof Enemy) {
-                Enemy enemy = (Enemy) body.getUserData();
-                if (enemy.getIsToDestroy()) {
-                    enemy.destroy();
-                    enemies.remove(enemy);
-                    bodyIterator.remove();
-                    continue;
-                }
-            }else if(body.getUserData() instanceof Bullet){
-                Bullet bullet = (Bullet) body.getUserData();
-                if(bullet.getIsToDestroy()) {
-                    bullet.destroy();
-                    player.addPoints(1);
-                }
+
+        for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext();) {
+            Enemy enemy = enemyIterator.next();
+            if (enemy.getIsToDestroy() || enemy.getIsToDestroy()) {
+                enemy.destroy();
+                enemyIterator.remove();
+                continue;
             }
         }
-
     }
 }
