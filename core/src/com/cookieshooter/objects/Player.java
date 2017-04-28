@@ -83,10 +83,6 @@ public class Player extends Object {
         return stats;
     }
 
-    public int getPoints() {
-        return stats.getPoints();
-    }
-
     public void addPoints(int points) {
         stats.changePoints(points);
     }
