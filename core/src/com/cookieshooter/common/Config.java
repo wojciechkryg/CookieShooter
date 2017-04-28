@@ -11,6 +11,7 @@ public class Config {
     public final static float BACKGROUND_G = 125/255f;
     public final static float BACKGROUND_B = 171/255f;
     public final static float MARGIN = 30;
+    public final static float CHAR_WIDTH = 20;
     //endregion StatsBar
 
     //region Objects
