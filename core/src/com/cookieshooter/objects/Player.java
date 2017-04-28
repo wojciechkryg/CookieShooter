@@ -60,6 +60,7 @@ public class Player extends Object {
     @Override
     public void draw(SpriteBatch batch) {
         batch.draw(sprite, sprite.getX(), sprite.getY(), width * Config.OBJECT_RATIO, height * Config.OBJECT_RATIO);
+        drawBullets(batch);
     }
 
     @Override
@@ -187,6 +188,12 @@ public class Player extends Object {
         if (canShoot()) {
             bullets.add(getBullet());
             fireBulletDelay = DEFAULT_FIRE_DELAY;
+        }
+    }
+
+    private void drawBullets(SpriteBatch batch) {
+        for (Bullet bullet : bullets) {
+            bullet.draw(batch);
         }
     }
 
