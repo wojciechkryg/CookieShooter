@@ -96,6 +96,7 @@ public class PlayState extends State {
         for (Enemy enemy : enemies) {
             enemy.dispose();
         }
+        statsBar.dispose();
     }
 
     private void handleKeyInput() {

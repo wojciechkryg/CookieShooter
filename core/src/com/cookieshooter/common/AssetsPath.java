@@ -21,6 +21,7 @@ public class AssetsPath {
     public final static String PLAYER = "player.png";
     public final static String ENEMY = "enemy.png";
     public final static String BULLET = "bullet.png";
+    public final static String HEARTH = "hearth.png";
 
     //endregion Game
 }
