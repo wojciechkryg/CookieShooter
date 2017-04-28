@@ -82,7 +82,7 @@ public class PlayState extends State {
 
         batch.end();
 
-        statsBar.drawStatsBar(batch, player.getPoints());
+        statsBar.drawStatsBar(batch, player.getStats());
     }
 
     @Override

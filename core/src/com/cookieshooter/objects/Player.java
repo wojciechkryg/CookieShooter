@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.common.AssetsPath;
 import com.cookieshooter.common.Config;
 import com.cookieshooter.objects.base.Object;
+import com.cookieshooter.utils.Stats;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,7 +32,7 @@ public class Player extends Object {
 
     private float fireBulletDelay = DEFAULT_FIRE_DELAY;
 
-    private int points;
+    private Stats stats;
 
     //endregion
 
@@ -78,12 +79,36 @@ public class Player extends Object {
         handleTouchInput();
     }
 
-    public int getPoints() {
-        return points;
+    public Stats getStats() {
+        return stats;
     }
 
-    public void addPoints(int points){
-        this.points += points;
+    public int getPoints() {
+        return stats.getPoints();
+    }
+
+    public void addPoints(int points) {
+        stats.changePoints(points);
+    }
+
+    public int getLevel() {
+        return stats.getLevel();
+    }
+
+    public void nextLevel() {
+        stats.nextLevel();
+    }
+
+    public int getLives() {
+        return stats.getLives();
+    }
+
+    public void increaseLives() {
+        stats.incrementLives();
+    }
+
+    public void decreaseLives() {
+        stats.decrementLives();
     }
 
 
@@ -95,7 +120,7 @@ public class Player extends Object {
         initSize();
         initBody();
         initImage();
-        points = 0;
+        stats = new Stats();
     }
 
     private void initSize() {
@@ -166,14 +191,13 @@ public class Player extends Object {
     }
 
     private void updateBullets(float deltaTime) {
-        for (Iterator<Bullet> bulletIterator = bullets.iterator(); bulletIterator.hasNext();) {
+        for (Iterator<Bullet> bulletIterator = bullets.iterator(); bulletIterator.hasNext(); ) {
             Bullet bullet = bulletIterator.next();
-            if (bullet.isOutOfViewport() ) {
+            if (bullet.isOutOfViewport()) {
                 bullet.destroy();
                 bulletIterator.remove();
                 continue;
-            }
-            else if(bullet.getIsToDestroy()){
+            } else if (bullet.getIsToDestroy()) {
                 addPoints(1);
                 bullet.destroy();
                 bulletIterator.remove();
@@ -190,7 +214,7 @@ public class Player extends Object {
     private Vector2 getBulletPosition() {
         return new Vector2(
                 body.getPosition().x,
-                body.getPosition().y + (2*height)
+                body.getPosition().y + (2 * height)
         );
     }
 

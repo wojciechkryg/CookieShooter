@@ -10,12 +10,16 @@ public class Config {
     public final static float BACKGROUND_R = 38/255f;
     public final static float BACKGROUND_G = 125/255f;
     public final static float BACKGROUND_B = 171/255f;
-
+    public final static float MARGIN = 30;
     //endregion StatsBar
 
     //region Objects
 
     public final static float OBJECT_RATIO = 20;
+
+    //region Player
+    public final static int START_LEVEL = 1;
+    //endregion Player
 
     //region Enemy
 

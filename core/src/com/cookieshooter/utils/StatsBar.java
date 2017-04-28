@@ -43,9 +43,9 @@ public class StatsBar {
         bitmapFont.setColor(Color.WHITE);
     }
 
-    public void drawStatsBar(SpriteBatch batch, int score) {
+    public void drawStatsBar(SpriteBatch batch, Stats stats) {
         drawBackground();
-        drawScore(batch, score);
+        drawScore(batch, stats.getPoints());
     }
 
     private void drawBackground() {
@@ -61,7 +61,7 @@ public class StatsBar {
 
     private void drawScore(SpriteBatch batch, int score) {
         batch.begin();
-        bitmapFont.draw(batch, "SCORE: " + score, x + 20, y + 20 );
+        bitmapFont.draw(batch, "SCORE: " + score, x + Config.MARGIN, y + (bitmapFont.getXHeight() + height) / 2);
         batch.end();
     }
 }
