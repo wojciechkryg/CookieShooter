@@ -95,8 +95,7 @@ public class Bullet extends Object {
     }
 
     private void initImage() {
-        // todo: texture is ignored
-        texture = new Texture(AssetsPath.PLAYER);
+        texture = new Texture(AssetsPath.BULLET);
         sprite = new Sprite(texture);
         update(0);
     }

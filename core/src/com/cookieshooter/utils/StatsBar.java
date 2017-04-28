@@ -4,18 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.cookieshooter.common.AssetsPath;
 import com.cookieshooter.common.Config;
-
-import static com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.*;
 
 public class StatsBar {
 
     private float width, height;
     private float x, y;
+    private float levelWidth;
 
     private ShapeRenderer shapeRenderer;
 
@@ -25,6 +23,7 @@ public class StatsBar {
     public StatsBar() {
         initStatsBar();
         initFont();
+        levelWidth = getLevelWidth();
     }
 
     private void initStatsBar() {
@@ -43,9 +42,15 @@ public class StatsBar {
         bitmapFont.setColor(Color.WHITE);
     }
 
+    private float getLevelWidth() {
+        String sample = "LEVEL: ";
+        GlyphLayout layout = new GlyphLayout(bitmapFont, sample);
+        return layout.width;
+    }
+
     public void drawStatsBar(SpriteBatch batch, Stats stats) {
         drawBackground();
-        drawScore(batch, stats.getPoints());
+        drawStats(batch, stats);
     }
 
     private void drawBackground() {
@@ -59,9 +64,17 @@ public class StatsBar {
         Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
-    private void drawScore(SpriteBatch batch, int score) {
+    private void drawStats(SpriteBatch batch, Stats stats) {
+
+        float levelLabelWidth = levelWidth + getNumberOfDigits(stats.getLevel()) * Config.CHAR_WIDTH;
+
         batch.begin();
-        bitmapFont.draw(batch, "SCORE: " + score, x + Config.MARGIN, y + (bitmapFont.getXHeight() + height) / 2);
+        bitmapFont.draw(batch, "SCORE: " + stats.getPoints(), x + Config.MARGIN, y + (bitmapFont.getXHeight() + height) / 2);
+        bitmapFont.draw(batch, "LEVEL: " + stats.getLevel(), width - levelLabelWidth - Config.MARGIN, y + (bitmapFont.getXHeight() + height) / 2);
         batch.end();
+    }
+
+    private int getNumberOfDigits(int number) {
+        return (int)(Math.log10(number)+1);
     }
 }

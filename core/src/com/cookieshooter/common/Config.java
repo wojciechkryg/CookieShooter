@@ -11,6 +11,7 @@ public class Config {
     public final static float BACKGROUND_G = 125/255f;
     public final static float BACKGROUND_B = 171/255f;
     public final static float MARGIN = 30;
+    public final static float CHAR_WIDTH = 20;
     //endregion StatsBar
 
     //region Objects
@@ -32,7 +33,7 @@ public class Config {
 
     //region Bullet
 
-    public final static float BULLET_RATIO = 100;
+    public final static float BULLET_RATIO = 20;
     public final static float DEFAULT_FIRE_DELAY = 0.8f;
 
     //endregion Bullet
