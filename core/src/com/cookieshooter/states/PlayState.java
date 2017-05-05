@@ -17,6 +17,7 @@ import com.cookieshooter.objects.Player;
 import com.cookieshooter.utils.Border;
 import com.cookieshooter.utils.Ground;
 import com.cookieshooter.utils.ListenerClass;
+import com.cookieshooter.utils.SoundHelper;
 import com.cookieshooter.utils.StatsBar;
 
 import java.util.ArrayList;
@@ -97,6 +98,7 @@ public class PlayState extends State {
             enemy.dispose();
         }
         statsBar.dispose();
+        SoundHelper.getInstance().dispose();
     }
 
     private void handleKeyInput() {

@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.common.AssetsPath;
 import com.cookieshooter.common.Config;
 import com.cookieshooter.objects.base.Object;
+import com.cookieshooter.utils.SoundHelper;
 import com.cookieshooter.utils.Stats;
 
 import java.util.ArrayList;
@@ -184,6 +185,7 @@ public class Player extends Object {
         if (canShoot()) {
             bullets.add(getBullet());
             fireBulletDelay = DEFAULT_FIRE_DELAY;
+            SoundHelper.getInstance().playShoot();
         }
     }
 

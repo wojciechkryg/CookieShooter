@@ -16,6 +16,13 @@ public class AssetsPath {
 
     //endregion Font
 
+    //region Sound
+
+    public final static String OUCH = "sound/ouch.wav";
+    public final static String SHOOT = "sound/shoot.wav";
+
+    //endregion Sound
+
     //region Game
 
     public final static String PLAYER = "player.png";
