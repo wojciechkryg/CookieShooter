@@ -44,7 +44,6 @@ public class StatsBar {
     //region Public methods
 
     public void drawStatsBar(SpriteBatch batch, Stats stats) {
-        drawBackground();
         drawStats(batch, stats);
         drawHearths(batch, stats);
     }

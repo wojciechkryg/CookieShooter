@@ -45,16 +45,10 @@ public class PlayState extends State {
         b2dr = new Box2DDebugRenderer();
 
         new Border().init(viewport, world);
-        new Ground().init(viewport,world);
+        new Ground().init(viewport, world);
 
         player = new Player(viewport, world);
-
         enemies = new ArrayList<Enemy>();
-        enemies.add(new Enemy(viewport, world));
-        enemies.add(new Enemy(viewport, world));
-        enemies.add(new Enemy(viewport, world));
-        enemies.add(new Enemy(viewport, world));
-        enemies.add(new Enemy(viewport, world));
     }
 
     @Override
@@ -66,6 +60,8 @@ public class PlayState extends State {
     public void update(float deltaTime) {
         handleInput();
         world.step(1 / 45f, 6, 2);
+
+        generateEnemies();
         destroyEnemies();
 
         updateObjects(deltaTime);
@@ -101,6 +97,15 @@ public class PlayState extends State {
         SoundHelper.getInstance().dispose();
     }
 
+    private void generateEnemies() {
+        if (enemies.size() <= 0) {
+            player.getStats().nextLevel();
+            for (int i = 0; i < 10; i++) {
+                enemies.add(new Enemy(viewport, world));
+            }
+        }
+    }
+
     private void handleKeyInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             // TODO: pause current state
@@ -121,10 +126,10 @@ public class PlayState extends State {
             enemy.draw(batch);
         }
     }
-    
-    private void destroyEnemies(){
 
-        for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext();) {
+    private void destroyEnemies() {
+
+        for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {
             Enemy enemy = enemyIterator.next();
             if (enemy.getIsToDestroy() || enemy.getIsToDestroy()) {
                 enemy.destroy();

@@ -10,6 +10,7 @@ public final class SoundHelper {
 
     private Music ouch;
     private Music shoot;
+    private Music chrup;
 
     private SoundHelper() {
         initSounds();
@@ -25,6 +26,7 @@ public final class SoundHelper {
     private void initSounds() {
         ouch = Gdx.audio.newMusic(Gdx.files.internal(AssetsPath.OUCH));
         shoot = Gdx.audio.newMusic(Gdx.files.internal(AssetsPath.SHOOT));
+        chrup = Gdx.audio.newMusic(Gdx.files.internal(AssetsPath.CHRUP));
     }
 
     public void playOuch() {
@@ -35,11 +37,14 @@ public final class SoundHelper {
         shoot.play();
     }
 
+    public void playChrup() {
+        chrup.play();
+    }
+
     public void dispose() {
         instance = null;
-        if(ouch!= null)
         ouch.dispose();
-        if(shoot != null)
         shoot.dispose();
+        chrup.dispose();
     }
 }

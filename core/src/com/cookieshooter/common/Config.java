@@ -19,7 +19,7 @@ public class Config {
     public final static float OBJECT_RATIO = 20;
 
     //region Player
-    public final static int START_LEVEL = 1;
+    public final static int START_LEVEL = 0;
     //endregion Player
 
     //region Enemy

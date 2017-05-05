@@ -20,6 +20,7 @@ public class AssetsPath {
 
     public final static String OUCH = "sound/ouch.wav";
     public final static String SHOOT = "sound/shoot.wav";
+    public final static String CHRUP = "sound/chrup.mp3";
 
     //endregion Sound
 
