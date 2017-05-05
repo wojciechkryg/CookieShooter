@@ -100,7 +100,7 @@ public class PlayState extends State {
     private void generateEnemies() {
         if (enemies.size() <= 0) {
             player.getStats().nextLevel();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < player.getLevel(); i++) {
                 enemies.add(new Enemy(viewport, world));
             }
         }
