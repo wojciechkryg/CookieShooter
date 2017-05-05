@@ -46,7 +46,7 @@ public class Bullet extends Object {
 
     @Override
     public void draw(SpriteBatch batch) {
-        batch.draw(sprite, sprite.getX(), sprite.getY(), radius * Config.BULLET_RATIO, radius * Config.BULLET_RATIO);
+        batch.draw(sprite, sprite.getX(), sprite.getY(), Config.BULLET_RATIO / radius, Config.BULLET_RATIO / radius);
     }
 
     @Override
