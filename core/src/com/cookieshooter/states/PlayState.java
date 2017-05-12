@@ -58,6 +58,11 @@ public class PlayState extends State {
 
     @Override
     public void update(float deltaTime) {
+
+        if(player.getLives()== 0){
+            GameStateManager.getInstance().set(new EndState());
+        }
+
         handleInput();
         world.step(1 / 45f, 6, 2);
 
@@ -68,7 +73,7 @@ public class PlayState extends State {
 
         cam.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         cam.update();
-        b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
+       // b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
     }
 
     @Override

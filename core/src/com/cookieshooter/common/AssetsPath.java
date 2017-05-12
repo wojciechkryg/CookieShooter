@@ -32,4 +32,8 @@ public class AssetsPath {
     public final static String HEARTH = "hearth.png";
 
     //endregion Game
+
+    //region Game Over
+    public final static String GAME_OVER = "game_over.png";
+    //endregion
 }
