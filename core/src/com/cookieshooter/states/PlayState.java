@@ -4,14 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.common.Config;
-import com.cookieshooter.objects.Bullet;
 import com.cookieshooter.objects.Enemy;
 import com.cookieshooter.objects.Player;
 import com.cookieshooter.utils.Border;
@@ -108,8 +105,8 @@ public class PlayState extends State {
 
     private void handleKeyInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            // TODO: pause current state
-            GameStateManager.getInstance().set(new MenuState());
+            GameStateManager.getInstance().save();
+            GameStateManager.getInstance().set(new PauseState());
         }
     }
 

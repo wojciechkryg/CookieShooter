@@ -10,13 +10,16 @@ public final class GameStateManager {
 
     private static GameStateManager instance;
 
+    private static State savedState;
+
     private static Stack<State> states = new Stack<State>();
 
     //endregion Private variables
 
     //region Constructors
 
-    private GameStateManager() {}
+    private GameStateManager() {
+    }
 
     //endregion Constructors
 
@@ -34,7 +37,12 @@ public final class GameStateManager {
         if (states.size() == 0) {
             return;
         }
-        states.pop().dispose();
+
+        State state = states.pop();
+        if (state.equals(savedState)) {
+            return;
+        }
+        state.dispose();
     }
 
     public void set(State state) {
@@ -52,6 +60,16 @@ public final class GameStateManager {
 
     public void resize(int width, int height) {
         states.peek().resize(width, height);
+    }
+
+    public void save() {
+        savedState = states.peek();
+    }
+
+    public void restore() {
+        if (savedState != null) {
+            set(savedState);
+        }
     }
 
     //endregion Public methods
