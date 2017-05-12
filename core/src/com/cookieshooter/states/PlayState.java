@@ -131,7 +131,7 @@ public class PlayState extends State {
 
         for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {
             Enemy enemy = enemyIterator.next();
-            if (enemy.getIsToDestroy() || enemy.getIsToDestroy()) {
+            if (enemy.getIsToDestroy()) {
                 enemy.destroy();
                 enemyIterator.remove();
                 continue;

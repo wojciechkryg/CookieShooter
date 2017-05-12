@@ -1,8 +1,11 @@
 package com.cookieshooter.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -16,8 +19,12 @@ import com.cookieshooter.utils.RandomVector;
 
 public class Enemy extends Object {
 
+    private TextureRegion[] animationFrames;
+    private Animation animation;
     private Vector2 velocity;
+
     private float radius;
+    private float elapsedTime;
 
 
     public Enemy(Viewport viewport, World world) {
@@ -30,6 +37,7 @@ public class Enemy extends Object {
         initVelocity();
         initBody();
         initImage();
+        initAnimation();
         isToDestroy = false;
     }
 
@@ -74,6 +82,22 @@ public class Enemy extends Object {
         update(0);
     }
 
+    private void initAnimation() {
+        Texture tempTexture = new Texture(AssetsPath.CRASH_ENEMY);
+        TextureRegion tempFrames[][] = TextureRegion.split(tempTexture, texture.getWidth(), texture.getHeight());
+
+        animationFrames = new TextureRegion[4];
+        int index = 0;
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                animationFrames[index++] = tempFrames[j][i];
+            }
+        }
+
+        animation = new Animation(1f / 4f, animationFrames);
+    }
+
     @Override
     public void update(float deltaTime) {
         float spriteX = (body.getPosition().x - radius) * Config.PPM;
@@ -86,7 +110,9 @@ public class Enemy extends Object {
 
     @Override
     public void draw(SpriteBatch batch) {
-        batch.draw(sprite, sprite.getX(), sprite.getY(), radius * Config.OBJECT_RATIO, radius * Config.OBJECT_RATIO);
+        elapsedTime += Gdx.graphics.getDeltaTime();
+//      batch.draw(sprite, sprite.getX(), sprite.getY(), radius * Config.OBJECT_RATIO, radius * Config.OBJECT_RATIO);
+        batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY(), radius * Config.OBJECT_RATIO, radius * Config.OBJECT_RATIO);
     }
 
     @Override
@@ -96,6 +122,7 @@ public class Enemy extends Object {
 
     @Override
     public void destroy() {
+
         dispose();
         world.destroyBody(body);
     }
