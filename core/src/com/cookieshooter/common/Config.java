@@ -46,4 +46,10 @@ public class Config {
 
     //endregion Menu
 
+    //region Pause
+
+    public final static float PAUSE_MARGIN = 10;
+
+    //endregion Pause
+
 }

@@ -48,8 +48,9 @@ public class PauseState extends State {
 
     private void createActors(float width, float height) {
         Pause pause = new Pause(width, height);
-        stage.addActor(pause.getPlayButtonActor(getOnPlayButtonClickedListener()));
-        stage.addActor(pause.getMenuButtonActor(getOnMenuButtonClickedListener()));
+        stage.addActor(pause.getLogoActor());
+        stage.addActor(pause.getContinueButtonActor(getOnPlayButtonClickedListener()));
+        stage.addActor(pause.getExitButtonActor(getOnMenuButtonClickedListener()));
     }
 
     private EventListener getOnPlayButtonClickedListener() {

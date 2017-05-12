@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.cookieshooter.common.AssetsPath;
 import com.cookieshooter.common.Config;
 
+import static com.cookieshooter.common.Config.PAUSE_MARGIN;
+
 public class Pause {
 
     //region Private variables
@@ -31,20 +33,32 @@ public class Pause {
 
     //region Public methods
 
-    public Actor getPlayButtonActor(EventListener eventListener) {
-        Actor button = getImageButtonActor(AssetsPath.MENU_START_BUTTON);
+    public Actor getLogoActor() {
+        Texture logo = new Texture(AssetsPath.PAUSE_LOGO);
+        Drawable drawable = getTextureDrawable(logo);
+        float scale = width / logo.getWidth();
+        drawable.setMinWidth(width);
+        drawable.setMinHeight(logo.getHeight() * scale);
+        Image actor = new Image(drawable);
+        actor.setPosition(0, height - (actor.getHeight() + height / 10));
+
+        return actor;
+    }
+
+    public Actor getContinueButtonActor(EventListener eventListener) {
+        Actor button = getImageButtonActor(AssetsPath.PAUSE_CONTINUE_BUTTON);
 
         button.addListener(eventListener);
-        button.setPosition(width / 2 - button.getWidth() / 2, height / 3 - button.getHeight() / 2);
+        button.setPosition(width / 2 + PAUSE_MARGIN, height / 4 - button.getHeight() / 2);
 
         return button;
     }
 
-    public Actor getMenuButtonActor(EventListener eventListener) {
-        Actor button = getImageButtonActor(AssetsPath.MENU_EXIT_BUTTON);
+    public Actor getExitButtonActor(EventListener eventListener) {
+        Actor button = getImageButtonActor(AssetsPath.PAUSE_EXIT_BUTTON);
 
         button.addListener(eventListener);
-        button.setPosition(width / 2 - button.getWidth() / 2, Config.MENU_BOTTOM_MARGIN);
+        button.setPosition(width / 2 - button.getWidth() - PAUSE_MARGIN, height / 4 - button.getHeight() / 2);
 
         return button;
     }
