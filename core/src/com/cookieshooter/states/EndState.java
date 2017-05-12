@@ -49,6 +49,9 @@ public class EndState extends State {
 
     @Override
     public void render(SpriteBatch batch) {
+        if(Gdx.input.justTouched()){
+            GameStateManager.getInstance().set(new MenuState());
+        }
         batch.begin();
         stage.draw();
         batch.end();
