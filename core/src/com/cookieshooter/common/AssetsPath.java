@@ -10,6 +10,14 @@ public class AssetsPath {
 
     //endregion Menu
 
+    //region Pause
+
+    public final static String PAUSE_LOGO = "pause_logo.jpg";
+    public final static String PAUSE_CONTINUE_BUTTON = "pause_continue.png";
+    public final static String PAUSE_EXIT_BUTTON = "pause_exit.png";
+
+    //endregion Pause
+
     //region Font
 
     public final static String OPENSANS = "font/opensans.ttf";
@@ -33,4 +41,8 @@ public class AssetsPath {
     public final static String HEARTH = "hearth.png";
 
     //endregion Game
+
+    //region Game Over
+    public final static String GAME_OVER = "game_over.png";
+    //endregion
 }

@@ -4,14 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.common.Config;
-import com.cookieshooter.objects.Bullet;
 import com.cookieshooter.objects.Enemy;
 import com.cookieshooter.objects.Player;
 import com.cookieshooter.utils.Border;
@@ -58,6 +55,11 @@ public class PlayState extends State {
 
     @Override
     public void update(float deltaTime) {
+
+        if(player.getLives()== 0){
+            GameStateManager.getInstance().set(new EndState());
+        }
+
         handleInput();
         world.step(1 / 45f, 6, 2);
 
@@ -68,7 +70,7 @@ public class PlayState extends State {
 
         cam.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         cam.update();
-        b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
+       // b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
     }
 
     @Override
@@ -108,8 +110,8 @@ public class PlayState extends State {
 
     private void handleKeyInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            // TODO: pause current state
-            GameStateManager.getInstance().set(new MenuState());
+            GameStateManager.getInstance().save();
+            GameStateManager.getInstance().set(new PauseState());
         }
     }
 
