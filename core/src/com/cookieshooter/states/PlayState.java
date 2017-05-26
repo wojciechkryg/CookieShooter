@@ -73,7 +73,7 @@ public class PlayState extends State {
 
         cam.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         cam.update();
-        b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
+//        b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
     }
 
     @Override
