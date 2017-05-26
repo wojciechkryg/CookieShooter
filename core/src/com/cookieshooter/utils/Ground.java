@@ -9,13 +9,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cookieshooter.common.Config;
 
 public class Ground {
-    public void init(Viewport viewport, World world) {
-        initBottom(viewport, world);
+    public void init(Viewport viewport, World world, int x, int y) {
+        initBottom(viewport, world, x, y);
     }
 
-    private void initBottom(Viewport viewport, World world) {
+    private void initBottom(Viewport viewport, World world, int x, int y) {
         BodyDef bodyDefinition = new BodyDef();
-        bodyDefinition.position.set(0, 0);
+        bodyDefinition.position.set(x, y);
         bodyDefinition.type = BodyDef.BodyType.StaticBody;
         Body b2body = world.createBody(bodyDefinition);
         b2body.setUserData(this);

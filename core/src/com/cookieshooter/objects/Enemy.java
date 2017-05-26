@@ -91,28 +91,36 @@ public class Enemy extends Object {
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                animationFrames[index++] = tempFrames[j][i];
+                animationFrames[index++] = tempFrames[i][j];
             }
         }
 
-        animation = new Animation(1f / 4f, animationFrames);
+        animation = new Animation(Config.ANIMATION_TIME, animationFrames);
+        animation.setPlayMode(Animation.PlayMode.NORMAL);
     }
 
     @Override
     public void update(float deltaTime) {
-        float spriteX = (body.getPosition().x - radius) * Config.PPM;
-        float spriteY = (body.getPosition().y - radius) * Config.PPM;
-        float rotation = (float) Math.toDegrees(body.getAngle());
+        if(body != null) {
+            float spriteX = (body.getPosition().x - radius) * Config.PPM;
+            float spriteY = (body.getPosition().y - radius) * Config.PPM;
+            float rotation = (float) Math.toDegrees(body.getAngle());
 
-        sprite.setPosition(spriteX, spriteY);
-        sprite.setRotation(rotation);
+            sprite.setPosition(spriteX, spriteY);
+            sprite.setRotation(rotation);
+        }
     }
 
     @Override
     public void draw(SpriteBatch batch) {
-        elapsedTime += Gdx.graphics.getDeltaTime();
-//      batch.draw(sprite, sprite.getX(), sprite.getY(), radius * Config.OBJECT_RATIO, radius * Config.OBJECT_RATIO);
-        batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY(), radius * Config.OBJECT_RATIO, radius * Config.OBJECT_RATIO);
+        if(isToDestroy) {
+            elapsedTime += Gdx.graphics.getDeltaTime();
+            if(!animation.isAnimationFinished(elapsedTime)) {
+                batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime), sprite.getX(), sprite.getY(), radius * Config.OBJECT_RATIO, radius * Config.OBJECT_RATIO);
+            }
+        } else {
+            batch.draw(sprite, sprite.getX(), sprite.getY(), radius * Config.OBJECT_RATIO, radius * Config.OBJECT_RATIO);
+        }
     }
 
     @Override
@@ -122,9 +130,15 @@ public class Enemy extends Object {
 
     @Override
     public void destroy() {
-
         dispose();
-        world.destroyBody(body);
+        destroyBody();
+    }
+
+    public void destroyBody() {
+        if(body != null) {
+            world.destroyBody(body);
+            body = null;
+        }
     }
 
     public void setIsToDestroy(Boolean value) {
@@ -135,4 +149,7 @@ public class Enemy extends Object {
         return isToDestroy;
     }
 
+    public Boolean getIsAnimationFinished() {
+        return animation.isAnimationFinished(elapsedTime);
+    }
 }

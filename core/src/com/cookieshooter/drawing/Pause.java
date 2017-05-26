@@ -36,11 +36,11 @@ public class Pause {
     public Actor getLogoActor() {
         Texture logo = new Texture(AssetsPath.PAUSE_LOGO);
         Drawable drawable = getTextureDrawable(logo);
-        float scale = width / logo.getWidth();
-        drawable.setMinWidth(width);
+        float scale = width * 3 / 4 / logo.getWidth();
+        drawable.setMinWidth(width * 3 / 4);
         drawable.setMinHeight(logo.getHeight() * scale);
         Image actor = new Image(drawable);
-        actor.setPosition(0, height - (actor.getHeight() + height / 10));
+        actor.setPosition(width / 2 - width * 3 / 8, height - (actor.getHeight() + height / 10));
 
         return actor;
     }

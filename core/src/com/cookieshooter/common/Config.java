@@ -28,6 +28,7 @@ public class Config {
     public final static int MAX_X = 20;
     public final static int MIN_Y = -30;
     public final static int MAX_Y = -5;
+    public final static float ANIMATION_TIME = 1f/16f;
 
     //endregion Enemy
 
