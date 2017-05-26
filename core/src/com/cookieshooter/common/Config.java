@@ -52,4 +52,19 @@ public class Config {
 
     //endregion Pause
 
+    //region End game
+
+    public final static String ENDGAME_HIGSCORE_TEXT = "Highscore";
+    public final static String ENDGAME_SCORE_TEXT = "Score";
+
+    //endregion End game
+
+    //region Preferences
+
+    public final static String PREFERENCES_NAME = "COOKIE_SHOOTER";
+    public final static String PREFERENCES_HIGHSCORE = "HIGHSCORE";
+    public final static String PREFERENCES_SCORE = "SCORE";
+
+    //endregion Preferences
+
 }
