@@ -2,6 +2,7 @@ package com.cookieshooter.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -57,7 +58,8 @@ public class PlayState extends State {
     @Override
     public void update(float deltaTime) {
 
-        if(player.getLives()== 0){
+        if (player.getLives() == 0) {
+            setScores();
             GameStateManager.getInstance().set(new EndState());
         }
 
@@ -141,5 +143,20 @@ public class PlayState extends State {
                 }
             }
         }
+    }
+
+    private void setScores() {
+        Preferences preferences = Gdx.app.getPreferences(Config.PREFERENCES_NAME);
+        preferences.putInteger(Config.PREFERENCES_SCORE, player.getStats().getPoints());
+        preferences.putInteger(Config.PREFERENCES_HIGHSCORE, getHighscore(preferences));
+        preferences.flush();
+    }
+
+    private int getHighscore(Preferences preferences) {
+        int highscore = preferences.getInteger(Config.PREFERENCES_HIGHSCORE);
+
+        return highscore > player.getStats().getPoints()
+                ? highscore
+                : player.getStats().getPoints();
     }
 }
