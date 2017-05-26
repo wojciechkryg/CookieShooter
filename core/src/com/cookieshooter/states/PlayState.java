@@ -42,7 +42,7 @@ public class PlayState extends State {
         b2dr = new Box2DDebugRenderer();
 
         new Border().init(viewport, world);
-        new Ground().init(viewport, world);
+        new Ground().init(viewport, world, 0, 0);
 
         player = new Player(viewport, world);
         enemies = new ArrayList<Enemy>();
@@ -70,7 +70,7 @@ public class PlayState extends State {
 
         cam.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         cam.update();
-       // b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
+        b2dr.render(world, cam.combined); // TEST BOX2D PHYSICS
     }
 
     @Override
@@ -133,10 +133,11 @@ public class PlayState extends State {
 
         for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {
             Enemy enemy = enemyIterator.next();
-            if (enemy.getIsToDestroy() || enemy.getIsToDestroy()) {
-                enemy.destroy();
-                enemyIterator.remove();
-                continue;
+            if (enemy.getIsToDestroy()) {
+                enemy.destroyBody();
+                if(enemy.getIsAnimationFinished()) {
+                    enemyIterator.remove();
+                }
             }
         }
     }
