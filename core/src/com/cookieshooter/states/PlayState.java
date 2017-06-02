@@ -44,7 +44,7 @@ public class PlayState extends State {
 
         new Border().init(viewport, world);
         new Ground().init(viewport, world, 0, 0);
-        new Ground().init(viewport, world, 0, (int) viewport.getWorldHeight() + 10);
+        new Ground().init(viewport, world, 0, (int) (viewport.getWorldHeight() + viewport.getWorldWidth() / Config.OBJECT_RATIO * 3));
 
         player = new Player(viewport, world);
         enemies = new ArrayList<Enemy>();
