@@ -23,7 +23,7 @@ public class Border {
 
         FixtureDef fixtureDefinition = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight());
+        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight() + viewport.getWorldWidth() / Config.OBJECT_RATIO * 3);
 
         fixtureDefinition.shape = shape;
         b2body.createFixture(fixtureDefinition);
@@ -39,7 +39,7 @@ public class Border {
 
         FixtureDef fixtureDefinition = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight());
+        shape.setAsBox(1 / Config.PPM, viewport.getWorldHeight() + viewport.getWorldWidth() / Config.OBJECT_RATIO * 3);
 
         fixtureDefinition.shape = shape;
         b2body.createFixture(fixtureDefinition);

@@ -10,10 +10,6 @@ import com.cookieshooter.common.Config;
 
 public class Ground {
     public void init(Viewport viewport, World world, int x, int y) {
-        initBottom(viewport, world, x, y);
-    }
-
-    private void initBottom(Viewport viewport, World world, int x, int y) {
         BodyDef bodyDefinition = new BodyDef();
         bodyDefinition.position.set(x, y);
         bodyDefinition.type = BodyDef.BodyType.StaticBody;
